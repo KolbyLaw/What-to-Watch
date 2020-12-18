@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-12-18T03:30:08.969Z" agent="5.0 (Macintosh)" etag="bvsvhZ6gfQcr7Uydsy3I" version="14.0.5" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-18T03:32:40.692Z" agent="5.0 (Macintosh)" etag="BHlZbtDl_cYTkB9BP9pv" version="14.0.5" type="github">
   <diagram id="YnvMo-ieHza9WWnMhC12" name="Page-1">
     <mxGraphModel dx="2528" dy="945" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -13,7 +13,7 @@
         <mxCell id="JM_ZPAjgmXz1vGSueCe6-18" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-130" y="460" width="980" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="JM_ZPAjgmXz1vGSueCe6-29" value="MAIN SEARCH RESULT TITLE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="JM_ZPAjgmXz1vGSueCe6-29" value="&lt;font face=&quot;Courier New&quot;&gt;MAIN SEARCH RESULT TITLE&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="70" y="480" width="455" height="50" as="geometry" />
         </mxCell>
         <mxCell id="JM_ZPAjgmXz1vGSueCe6-34" value="GENRE" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Courier New;" vertex="1" parent="1">
@@ -146,7 +146,7 @@
           <mxGeometry x="510" y="990" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="JM_ZPAjgmXz1vGSueCe6-95" value="MOVIE POSTER" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Courier New;" vertex="1" parent="1">
-          <mxGeometry x="-110" y="540" width="150" height="150" as="geometry" />
+          <mxGeometry x="-110" y="480" width="150" height="210" as="geometry" />
         </mxCell>
         <mxCell id="JM_ZPAjgmXz1vGSueCe6-96" value="GENRE" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Courier New;" vertex="1" parent="1">
           <mxGeometry x="70" y="540" width="120" height="60" as="geometry" />
@@ -160,7 +160,7 @@
         <mxCell id="JM_ZPAjgmXz1vGSueCe6-99" value="USER RATING" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Courier New;" vertex="1" parent="1">
           <mxGeometry x="230" y="540" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="JM_ZPAjgmXz1vGSueCe6-100" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Courier New;" vertex="1" parent="1">
+        <mxCell id="JM_ZPAjgmXz1vGSueCe6-100" value="MOVIE TRAILER" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Courier New;" vertex="1" parent="1">
           <mxGeometry x="540" y="480" width="290" height="210" as="geometry" />
         </mxCell>
       </root>
