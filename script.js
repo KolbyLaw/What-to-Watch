@@ -48,6 +48,10 @@ function selectedMovieHTML(data) {
   //poster.style.width = "200px"
   selMovie.appendChild(poster)
 
+  overviewText = document.createElement("p")
+  overviewText.innerText = String(data[0].overview)
+  selMovie.appendChild(overviewText)
+
 
   
 
