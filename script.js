@@ -75,10 +75,7 @@ function getGenre(api_key) {
         form.appendChild(label)
 
       }
-      // let submit = document.createElement("input")
-      // submit.setAttribute("type","submit")
-      // submit.setAttribute("value","submit")
-      // form.appendChild(submit)
+    
 
 
     })
