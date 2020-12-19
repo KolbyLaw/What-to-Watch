@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="script.js" defer></script>
 </head>
+
 <body>
-    
+    <div class="selected-movie">
+        
+
+    </div>
+    <section class="selections">
+        <div id="genre-div">
+            <form id="genre-form">
+
+            </form>
+
+        </div>
+        <div class="number-results-div">
+            <input type="range" id="number-results" min="1" max="10" value="5" class="slider">
+            <span>Results: <span id="span-number-results">5</span></span>
+        </div>
+
+        <div>
+            <button type="button" id="get-results">Get Results</button>
+        </div>
+    </section>
 </body>
+
 </html>

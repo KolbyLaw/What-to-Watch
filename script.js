@@ -45,7 +45,7 @@ function selectedMovieHTML(data) {
   poster.setAttribute("class", "selected-movie-poster")
   // sizes for testing only update via css later
   poster.style.height = "200px"
-  poster.style.width = "200px"
+  //poster.style.width = "200px"
   selMovie.appendChild(poster)
 
 
