@@ -12,8 +12,6 @@ window.onload = () => {
 
     // get supported Genres from service on page load
     let genereCheckboxs = await getGenre(api_key);
-    console.log(genereCheckboxs);
-    temp = genereCheckboxs;
 
     storedCheckedItems(genereCheckboxs);
   }
@@ -27,7 +25,6 @@ document.querySelector("#get-results").addEventListener("click", function () {
 function slider() {
   let slide = document.getElementById("number-results");
   slide.oninput = () => {
-    console.log(slide.value);
     sliderValue = slide.value;
     document.getElementById("span-number-results").innerHTML = slide.value;
   };
@@ -36,9 +33,7 @@ function slider() {
 // complete everything in order when button is pressed
 async function resolver() {
   let checkedResults = checkboxGenre();
-  console.log(checkedResults);
   let returnDiscovery = await discoverCall(checkedResults);
-  console.log(returnDiscovery);
 
   // add items to html
   selectedMovieHTML(returnDiscovery[0]);
@@ -114,8 +109,6 @@ function secondaryMovies(data) {
     // remove the choice so it is not selected again.
     dataCopy.splice(random, 1);
   }
-
-  console.log(chosenTitles);
 }
 
 function storedCheckedItems(checkboxItems) {
@@ -128,7 +121,6 @@ function storedCheckedItems(checkboxItems) {
     let storedItem = localStorage.getItem(name);
 
     if (storedItem != null) {
-      console.log(name, storedItem);
       itemsArray[i].checked = true;
     } else {
       continue;
@@ -141,7 +133,6 @@ function getGenre(api_key) {
     fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         let form = document.getElementById("genre-form");
 
         for (const elm of result.genres) {
@@ -173,7 +164,6 @@ function discoverCall(genreList) {
     fetch(urlQuery)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         resolve(result.results);
       })
       .catch((error) => {
