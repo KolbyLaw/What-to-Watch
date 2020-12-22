@@ -115,7 +115,7 @@ function secondaryMovies(data) {
 
     // remove the choice so it is not selected again. 
     dataCopy.splice(random, 1)
-    temp = dataCopy
+    
 
   }
 
@@ -180,11 +180,22 @@ function discoverCall(genreList) {
 
 function checkboxGenre() {
   let array = []
+  let localStorageArray = []
+
+  //Select form and get all checked items. 
   let genreForm = document.querySelector("#genre-form")
-  let checkedItems = genreForm.querySelectorAll('input[type=checkbox]:checked')
+  let checkedItems = genreForm.querySelectorAll("input[type=checkbox]:checked")
 
   for (const elm of checkedItems) {
     array.push(elm.value)
+
+    // clear local storage before setting
+    localStorage.clear()
+
+    // set storage we will likely want to do this as a JSON item later but for now just individual values will be fine. 
+    localStorage.setItem(elm.name,"checked")
+
+
   }
 
   let stringQuery = null
