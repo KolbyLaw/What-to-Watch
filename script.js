@@ -200,6 +200,7 @@ function checkboxGenre() {
 
   }
 
+  // API does not take form data transfer results into string query. 
   let stringQuery = null
   if (array.length == false) {
     stringQuery = ""
