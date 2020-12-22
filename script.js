@@ -104,6 +104,7 @@ function secondaryMovies(data) {
     simmilarChoices.appendChild(movieDiv)
     let title = document.createElement("h3")
     title.innerText = dataCopy[random].title
+    movieDiv.appendChild(title)
 
 
     let poster = document.createElement("img")
