@@ -1,7 +1,7 @@
 // global scope
 api_key = "a942ead147c28026ed79eacf0354b7f0"
 let temp = null
-let sliderValue = 0
+let sliderValue = 5
 
 
 
@@ -80,6 +80,9 @@ function secondaryMovies(data) {
   let chosenTitles = []
   let simmilarChoices = document.querySelector(".simmilar-choices")
 
+  // splice out the already chosen element. 
+  dataCopy.splice(0,1)
+
   // clear old elements
   while (simmilarChoices.firstChild != null) {
     simmilarChoices.removeChild(simmilarChoices.firstChild)
@@ -87,11 +90,13 @@ function secondaryMovies(data) {
 
   // pull the number to select from the discovery defaulting to 5 for now.  
   for (let i = 0; i < sliderValue; i++) {
-    let random = Math.floor(Math.random() * dataCopy.length) + 1
+    let random = Math.floor(Math.random() * dataCopy.length)
+    
 
     chosenTitles.push(dataCopy[random])
-
+    
     let posterPath = (dataCopy[random].poster_path)
+    
 
     //add html
     let movieDiv = document.createElement("div")
