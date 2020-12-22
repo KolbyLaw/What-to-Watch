@@ -1,44 +1,60 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js" defer></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <title>What to Watch!</title>
+
 </head>
+
 
 <body>
 
+    <!-- Page Header START -->
+    <header>
+
+    </header>
 
 
-    </div>
+    <!-- Main Page Content START -->
+    <main>
 
-    <section class="selected-movie">
-        <div id="genre-div">
-
-
-        </div>
-
-    </section>
-
-    <section class="simmilar-choices">
+        <section class="selected-movie">
+            <div id="genre-div">
+            </div>
+        </section>
 
 
-    </section>
+        <section class="simmilar-choices">
+        </section>
 
-    <section class="select-options">
-        <form id="genre-form">
 
-        </form>
-        <button type="button" id="get-results">Get Results</button>
+        <section class="select-options">
+            <form id="genre-form">
+            </form>
 
-        <div class="number-results-div">
-            <input type="range" id="number-results" min="0" max="10" value="5" class="slider">
-            <span>Results: <span id="span-number-results">5</span></span>
-        </div>
+            <button type="button" id="get-results">Get Results</button>
 
-    </section>
+            <div class="number-results-div">
+                <input type="range" id="number-results" min="0" max="10" value="5" class="slider">
+                <span>Results: <span id="span-number-results">5</span></span>
+            </div>
+        </section>
+    
+        
+    </main>
+
+
+    <!-- Script Section -->
+    <script src="script.js"></script>
+
 </body>
 
 </html>
