@@ -9,6 +9,8 @@ let sliderValue = 5
 window.onload = () => {
   // get supported Genres from service on page load 
   getGenre(api_key)
+
+  // function to get values and update slider
   slider()
 
 
