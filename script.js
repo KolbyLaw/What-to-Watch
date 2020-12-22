@@ -4,7 +4,7 @@ let temp = null;
 let sliderValue = 5;
 
 window.onload = () => {
-  onLoadAsync()
+  onLoadAsync();
 
   async function onLoadAsync() {
     // function to get values and update slider
@@ -12,12 +12,10 @@ window.onload = () => {
 
     // get supported Genres from service on page load
     let genereCheckboxs = await getGenre(api_key);
-    console.log(genereCheckboxs)
-    temp = genereCheckboxs
+    console.log(genereCheckboxs);
+    temp = genereCheckboxs;
 
-    storedCheckedItems(genereCheckboxs)
-    
-
+    storedCheckedItems(genereCheckboxs);
   }
 };
 
@@ -120,20 +118,22 @@ function secondaryMovies(data) {
   console.log(chosenTitles);
 }
 
-function storedCheckedItems(checkboxItems){
-  let itemsArray = Array.from(checkboxItems.querySelectorAll("input[type=checkbox]")) 
+function storedCheckedItems(checkboxItems) {
+  let itemsArray = Array.from(
+    checkboxItems.querySelectorAll("input[type=checkbox]")
+  );
 
-  for(let i=0; i<itemsArray.length; i++){
-    let name = itemsArray[i].name
-    let storedItem = localStorage.getItem(name)
+  for (let i = 0; i < itemsArray.length; i++) {
+    let name = itemsArray[i].name;
+    let storedItem = localStorage.getItem(name);
 
-    if(storedItem != null){
-      console.log(name, storedItem)
+    if (storedItem != null) {
+      console.log(name, storedItem);
       itemsArray[i].checked = true;
-    }else{continue}
+    } else {
+      continue;
+    }
   }
-
-
 }
 
 function getGenre(api_key) {
@@ -188,8 +188,6 @@ function checkboxGenre() {
   //Select form and get all checked items.
   let genreForm = document.querySelector("#genre-form");
   let checkedItems = genreForm.querySelectorAll("input[type=checkbox]:checked");
-
-  
 
   // clear local storage before setting, Note do this as a json item later to prevent clearing all storage
   localStorage.clear();
