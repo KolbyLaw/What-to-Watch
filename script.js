@@ -186,11 +186,13 @@ function checkboxGenre() {
   let genreForm = document.querySelector("#genre-form")
   let checkedItems = genreForm.querySelectorAll("input[type=checkbox]:checked")
 
+  // clear local storage before setting, Note do this as a json item later to prevent clearing all storage
+  localStorage.clear()
+
   for (const elm of checkedItems) {
     array.push(elm.value)
 
-    // clear local storage before setting
-    localStorage.clear()
+    
 
     // set storage we will likely want to do this as a JSON item later but for now just individual values will be fine. 
     localStorage.setItem(elm.name,"checked")
