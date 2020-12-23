@@ -1,0 +1,7 @@
+.heroimg {
+    background-image: url("../images/hero-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-position: 50%;
+}
