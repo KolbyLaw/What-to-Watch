@@ -37,7 +37,9 @@ async function resolver() {
 
   // add items to html
   selectedMovieHTML(returnDiscovery[0]);
-  secondaryMovies(returnDiscovery);
+  let selectedSecondary = secondaryMovies(returnDiscovery);
+  clickedActions(selectedSecondary)
+  
 }
 
 function selectedMovieHTML(data) {
@@ -93,6 +95,7 @@ function secondaryMovies(data) {
     //add html
     let movieDiv = document.createElement("div");
     movieDiv.setAttribute("class", "movie-holder");
+    movieDiv.setAttribute("data-selection", i)
     simmilarChoices.appendChild(movieDiv);
     let title = document.createElement("h3");
     title.innerText = dataCopy[random].title;
@@ -109,6 +112,7 @@ function secondaryMovies(data) {
     // remove the choice so it is not selected again.
     dataCopy.splice(random, 1);
   }
+  return chosenTitles
 }
 
 function storedCheckedItems(checkboxItems) {
@@ -198,4 +202,18 @@ function checkboxGenre() {
   }
 
   return stringQuery;
+}
+
+function clickedActions (items) {
+  let selected = document.querySelector(".simmilar-choices");
+  let divs = Array.from(selected.querySelectorAll("div"))
+
+  for(let i = 0; i<divs.length; i++){
+    divs[i].addEventListener("click",function(){
+      console.log("image pressed")
+      console.log(divs[i].dataset.selection)
+    })
+  }
+
+
 }
