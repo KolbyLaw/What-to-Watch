@@ -40,10 +40,9 @@ async function resolver() {
   let returnDiscovery = await discoverCall(checkedResults);
 
   // add items to html
-  firstItem = returnDiscovery[0]
+  firstItem = returnDiscovery[0];
   selectedMovieHTML(firstItem);
   let selectedSecondary = secondaryMovies(returnDiscovery);
-  
 }
 
 function selectedMovieHTML(data) {
@@ -91,11 +90,10 @@ function selectedMovieHTML(data) {
 function secondaryMovies(data) {
   let dataCopy = data;
   let chosenTitles = [];
-  
+
   // splice out the already chosen element.
   dataCopy.splice(0, 1);
 
- 
   // pull the number to select from the discovery based on the slider.
   for (let i = 0; i < sliderValue; i++) {
     let random = Math.floor(Math.random() * dataCopy.length);
@@ -105,7 +103,7 @@ function secondaryMovies(data) {
     // remove the choice so it is not selected again.
     dataCopy.splice(random, 1);
   }
-  secondaryMoviesHTML(chosenTitles,data);
+  secondaryMoviesHTML(chosenTitles, data);
   return chosenTitles;
 }
 
@@ -130,7 +128,7 @@ function secondaryMoviesHTML(selected) {
       "src",
       `https://image.tmdb.org/t/p/original${selected[i].poster_path}`
     );
-    poster.style.height = "100px";
+    //poster.style.height = "100px";
     movieDiv.appendChild(poster);
   }
   clickedActions(selected);
@@ -239,20 +237,24 @@ function checkboxGenre() {
 function clickedActions(items) {
   let selected = document.querySelector(".simmilar-choices");
   let divs = Array.from(selected.querySelectorAll("div"));
-  
 
   for (let i = 0; i < divs.length; i++) {
     divs[i].addEventListener("click", function () {
       let selected = divs[i].dataset.selection;
-      let priorSelection = firstItem
-      firstItem = items[selected]
+      let priorSelection = firstItem;
+      firstItem = items[selected];
       selectedMovieHTML(firstItem);
-      
-      
-      // swap the position in the array for the prior selected item. 
-      items.splice(selected,1,priorSelection)
-      secondaryMoviesHTML(items)
 
+      // swap the position in the array for the prior selected item.
+      items.splice(selected, 1, priorSelection);
+      secondaryMoviesHTML(items);
+
+      // temp scroll to top
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
     });
   }
 }
