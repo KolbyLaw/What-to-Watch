@@ -27,8 +27,8 @@ function slider() {
   let slide = document.getElementById("number-results");
   slide.oninput = () => {
     sliderValue = slide.value;
-    document.querySelector("#span-number-results").innerHTML = String(
-      `${slide.value} Results`
+    document.querySelector("#span-number-results").innerHTML = (
+      `${(slide.value)} Results`
     );
     console.log(sliderValue);
   };
