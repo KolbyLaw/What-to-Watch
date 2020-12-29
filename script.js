@@ -2,6 +2,7 @@
 api_key = "a942ead147c28026ed79eacf0354b7f0";
 let temp = null;
 let sliderValue = 5;
+let firstItem = null;
 
 window.onload = () => {
   onLoadAsync();
@@ -39,9 +40,10 @@ async function resolver() {
   let returnDiscovery = await discoverCall(checkedResults);
 
   // add items to html
-  selectedMovieHTML(returnDiscovery[0]);
+  firstItem = returnDiscovery[0]
+  selectedMovieHTML(firstItem);
   let selectedSecondary = secondaryMovies(returnDiscovery);
-  clickedActions(selectedSecondary, returnDiscovery[0]);
+  
 }
 
 function selectedMovieHTML(data) {
@@ -89,13 +91,12 @@ function selectedMovieHTML(data) {
 function secondaryMovies(data) {
   let dataCopy = data;
   let chosenTitles = [];
-  //let simmilarChoices = document.querySelector(".simmilar-choices");
-
+  
   // splice out the already chosen element.
   dataCopy.splice(0, 1);
 
  
-  // pull the number to select from the discovery defaulting to 5 for now.
+  // pull the number to select from the discovery based on the slider.
   for (let i = 0; i < sliderValue; i++) {
     let random = Math.floor(Math.random() * dataCopy.length);
 
@@ -104,7 +105,7 @@ function secondaryMovies(data) {
     // remove the choice so it is not selected again.
     dataCopy.splice(random, 1);
   }
-  secondaryMoviesHTML(chosenTitles);
+  secondaryMoviesHTML(chosenTitles,data);
   return chosenTitles;
 }
 
@@ -132,6 +133,7 @@ function secondaryMoviesHTML(selected) {
     poster.style.height = "100px";
     movieDiv.appendChild(poster);
   }
+  clickedActions(selected);
 }
 
 function storedCheckedItems(checkboxItems) {
@@ -234,15 +236,23 @@ function checkboxGenre() {
   return stringQuery;
 }
 
-function clickedActions(items, firstItem) {
+function clickedActions(items) {
   let selected = document.querySelector(".simmilar-choices");
   let divs = Array.from(selected.querySelectorAll("div"));
-  console.log(items);
+  
 
   for (let i = 0; i < divs.length; i++) {
     divs[i].addEventListener("click", function () {
       let selected = divs[i].dataset.selection;
-      selectedMovieHTML(items[selected]);
+      let priorSelection = firstItem
+      firstItem = items[selected]
+      selectedMovieHTML(firstItem);
+      
+      
+      // swap the position in the array for the prior selected item. 
+      items.splice(selected,1,priorSelection)
+      secondaryMoviesHTML(items)
+
     });
   }
 }
