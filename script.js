@@ -46,12 +46,15 @@ async function resolver() {
 function selectedMovieHTML(data) {
   let selMovie = document.querySelector(".selected-movie");
   // clear old data
-  // while (selMovie.firstChild != null) {
-  //   selMovie.removeChild(selMovie.firstChild);
-  // }
+  while (selMovie.firstChild != null) {
+     selMovie.removeChild(selMovie.firstChild);
+  }
 
   //add title
-  let titleDiv = document.querySelector(".selected-title")
+
+  let titleDiv = document.createElement("div")
+  titleDiv.setAttribute("class","selected-title")
+  selMovie.appendChild(titleDiv)
   let title = document.createElement("h2");
   title.setAttribute("class", "selected-movie-poster");
   title.innerText = data.title;
@@ -60,7 +63,10 @@ function selectedMovieHTML(data) {
 
 
   // add img
-  let posterDiv = document.querySelector(".poster")
+
+  let posterDiv = document.createElement("div")
+  posterDiv.setAttribute("class","selected-poster")
+  selMovie.appendChild(posterDiv)
   let poster = document.createElement("img");
   poster.setAttribute(
     "src",
@@ -73,7 +79,9 @@ function selectedMovieHTML(data) {
   posterDiv.appendChild(poster);
 
   // info
-  let infoDiv = document.querySelector(".selected-info")
+  let infoDiv = document.createElement("div")
+  infoDiv.setAttribute("class","selected-movie-info")
+  selMovie.appendChild(infoDiv)
   overviewText = document.createElement("p");
   overviewText.innerText = String(data.overview);
   infoDiv.appendChild(overviewText);
