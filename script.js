@@ -90,15 +90,15 @@ function selectedMovieHTML(data) {
 function secondaryMovies(data) {
   let dataCopy = data;
   let chosenTitles = [];
-  let simmilarChoices = document.querySelector(".simmilar-choices");
+  //let simmilarChoices = document.querySelector(".simmilar-choices");
 
   // splice out the already chosen element.
   dataCopy.splice(0, 1);
 
   // clear old elements
-  while (simmilarChoices.firstChild != null) {
-    simmilarChoices.removeChild(simmilarChoices.firstChild);
-  }
+  // while (simmilarChoices.firstChild != null) {
+  //   simmilarChoices.removeChild(simmilarChoices.firstChild);
+  // }
 
   // pull the number to select from the discovery defaulting to 5 for now.
   for (let i = 0; i < sliderValue; i++) {
@@ -106,29 +106,60 @@ function secondaryMovies(data) {
 
     chosenTitles.push(dataCopy[random]);
 
-    let posterPath = dataCopy[random].poster_path;
+    //let posterPath = dataCopy[random].poster_path;
 
     //add html
+    // let movieDiv = document.createElement("div");
+    // movieDiv.setAttribute("class", "movie-holder");
+    // movieDiv.setAttribute("data-selection", i)
+    // simmilarChoices.appendChild(movieDiv);
+    // let title = document.createElement("h3");
+    // title.innerText = dataCopy[random].title;
+    // movieDiv.appendChild(title);
+
+    // let poster = document.createElement("img");
+    // poster.setAttribute(
+    //   "src",
+    //   `https://image.tmdb.org/t/p/original${posterPath}`
+    // );
+    // poster.style.height = "100px";
+    // movieDiv.appendChild(poster);
+
+    // remove the choice so it is not selected again.
+    dataCopy.splice(random, 1);
+  }
+  secondaryMoviesHTML(chosenTitles)
+  return chosenTitles
+}
+
+function secondaryMoviesHTML(selected) {
+  let simmilarChoices = document.querySelector(".simmilar-choices");
+  console.log(selected)
+  
+  while (simmilarChoices.firstChild != null) {
+    simmilarChoices.removeChild(simmilarChoices.firstChild);
+  }
+  for(let i = 0; i<selected.length; i++) {
+    
     let movieDiv = document.createElement("div");
     movieDiv.setAttribute("class", "movie-holder");
     movieDiv.setAttribute("data-selection", i)
     simmilarChoices.appendChild(movieDiv);
-    let title = document.createElement("h3");
-    title.innerText = dataCopy[random].title;
+    let title = document.createElement("h5");
+    title.innerText = selected[i].title;
     movieDiv.appendChild(title);
 
     let poster = document.createElement("img");
     poster.setAttribute(
       "src",
-      `https://image.tmdb.org/t/p/original${posterPath}`
+      `https://image.tmdb.org/t/p/original${selected[i].poster_path}`
     );
     poster.style.height = "100px";
     movieDiv.appendChild(poster);
+    
 
-    // remove the choice so it is not selected again.
-    dataCopy.splice(random, 1);
   }
-  return chosenTitles
+
 }
 
 function storedCheckedItems(checkboxItems) {
