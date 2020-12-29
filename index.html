@@ -5,17 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <!-- CSS Section -->
-    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" integrity="sha512-ZRv40llEogRmoWgZwnsqke3HNzJ0kiI0+pcMgiz2bxO6Ew1DVBtWjVn0qjrXdT3+u+pSN36gLgmJiiQ3cQtyzA==" crossorigin="anonymous" /> -->
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 
-  
+
     <title>What to Watch!</title>
 
 </head>
@@ -27,100 +27,79 @@
     <header class="hero heroimg">
         <div class="hero-body">
             <div class="container">
-              <h1 class="title">
-                What to Watch
-              </h1>
-              <h2 class="subtitle">
-                The Ultimate Movie Guide
-              </h2>
+                <h1 class="title">
+                    What to Watch
+                </h1>
+                <h2 class="subtitle">
+                    The Ultimate Movie Guide
+                </h2>
             </div>
-          </div>
+        </div>
     </header>
 
 
     <!-- Main Page Content START -->
     <main>
+        <div class="container">
+            <div class="row">
+                <!-- Search Option Column -->
+                <div class="col s3 options-side">
+                    <div class="genre">
+                        <form id="genre-form" action="#">
+                        </form>
+                    </div>
+                    <div class="range-selector">
 
-        <div class="row">
-
-            <!-- Search Option Column -->
-            <div class="col s2 search-column">
-                <div class="genre">
-                    <form id="genre-form" action="#">
-                    </form>
-                </div>                
-                <div class="range-selector">
-                    
-                    <form action="#">
-                        <p class="range-field">
-                            Number of movies <br>
-                          <input type="range" id="number-results" min="0" max="10" value="5"/><span id="span-number-results">5 Results</span>
-                        </p>
-                      </form>
-                        
-                    
+                        <form action="#">
+                            <p class="range-field">
+                                Number of movies <br>
+                                <input type="range" id="number-results" min="0" max="10" value="5" /><span
+                                    id="span-number-results">5 Results</span>
+                            </p>
+                        </form>
+                        <button class="waves-effect waves-light btn-large" id="get-results">Search Movies</button>
+                    </div>
                 </div>
-                <!-- <div>Search Criteria 3</div>
-                <div>Search Criteria 4</div>
-                <div>Search Criteria 5</div> -->
-
-                <button class="waves-effect waves-light btn-large" id="get-results">Search Movies</button>
-            </div>
-            </div>
-
-
-            <!-- Movie Display Section -->
-            <div class="col s10">
-
-                <!-- Focused Movie Section -->
-                <div class="row selected-movie">
-
-                    <!-- Movie Poster -->
-                    <div class="col s3 poster">Movie Poster</div>
+                <div class="col s9 display-side">
+                    <div class="container display-contianer">
+                        <div class="row selected-row">
+                            <div class="col s12 selected-column">
+                                <div class="selected-move">
+                                    <div class="selected-title"></div>
+                                    <div class="poster"></div>
+                                    <div class="selected-info"></div>
 
 
-                    <!-- Movie Description Section -->
-                    <div class="col s6">Movie Description Section</div>
+                                </div>
+                            </div>
+                            <div class="row options-row">
+                                <div class="col s12 options-column">
+                                    <div class="simmilar-choices">
 
-                        <!-- Movie Title and General Info -->
-                        <div class="row">
-                            <div class="row selected-title">Movie Title</div>
+                                    </div>
 
-                            <div class="row misc movie info">
-                                <div class="col s1">Misc Movie Info 1</div>
-                                <div class="col s1">Misc Movie Info 2</div>
-                                <div class="col s1">Misc Movie Info 3</div>
-                                <div class="col s1">Misc Movie Info 4</div>
+                                </div>
+
                             </div>
 
                         </div>
-
-                        <!-- Movie Description Text -->
-                        <div class="row">Movie Description Text</div>
-
-
-                    <!-- Movie Trailer -->
-                    <div class="col s3">Movie Trailer</div>
+                    </div>
 
 
                 </div>
-
-
-                <!-- Movie Search Results Section -->
-                <div class="row">Movie Search Results
-
-                </div>
-
             </div>
-
         </div>
 
-        
+
+
+
+
+        <!-- Movie Display Section -->
+
+
+
     </main>
 
-
-    <!-- Script Section -->
-    
 
 </body>
 

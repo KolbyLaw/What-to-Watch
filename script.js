@@ -40,7 +40,7 @@ async function resolver() {
   selectedMovieHTML(returnDiscovery[0]);
   let selectedSecondary = secondaryMovies(returnDiscovery);
   clickedActions(selectedSecondary)
-  
+
 }
 
 function selectedMovieHTML(data) {
@@ -60,6 +60,7 @@ function selectedMovieHTML(data) {
 
 
   // add img
+  let posterDiv = document.querySelector(".poster")
   let poster = document.createElement("img");
   poster.setAttribute(
     "src",
@@ -69,11 +70,13 @@ function selectedMovieHTML(data) {
   // sizes for testing only update via css later
   poster.style.height = "300px";
   //poster.style.width = "200px"
-  selMovie.appendChild(poster);
+  posterDiv.appendChild(poster);
 
+  // info
+  let infoDiv = document.querySelector(".selected-info")
   overviewText = document.createElement("p");
   overviewText.innerText = String(data.overview);
-  selMovie.appendChild(overviewText);
+  infoDiv.appendChild(overviewText);
 }
 
 function secondaryMovies(data) {
@@ -148,7 +151,7 @@ function getGenre(api_key) {
           let label = document.createElement("label")
           form.appendChild(label)
 
-        
+
 
 
           let input = document.createElement("input");
@@ -157,7 +160,7 @@ function getGenre(api_key) {
           input.setAttribute("name", elm.name);
           input.setAttribute("value", elm.id);
           label.appendChild(input);
-          
+
           let span = document.createElement("span")
           span.innerHTML = elm.name
           label.appendChild(span)
@@ -226,12 +229,12 @@ function checkboxGenre() {
   return stringQuery;
 }
 
-function clickedActions (items) {
+function clickedActions(items) {
   let selected = document.querySelector(".simmilar-choices");
   let divs = Array.from(selected.querySelectorAll("div"))
 
-  for(let i = 0; i<divs.length; i++){
-    divs[i].addEventListener("click",function(){
+  for (let i = 0; i < divs.length; i++) {
+    divs[i].addEventListener("click", function () {
       console.log("image pressed")
       console.log(divs[i].dataset.selection)
     })
