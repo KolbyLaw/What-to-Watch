@@ -5,13 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <!-- CSS Section -->
-    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" integrity="sha512-ZRv40llEogRmoWgZwnsqke3HNzJ0kiI0+pcMgiz2bxO6Ew1DVBtWjVn0qjrXdT3+u+pSN36gLgmJiiQ3cQtyzA==" crossorigin="anonymous" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" integrity="sha512-ZRv40llEogRmoWgZwnsqke3HNzJ0kiI0+pcMgiz2bxO6Ew1DVBtWjVn0qjrXdT3+u+pSN36gLgmJiiQ3cQtyzA==" crossorigin="anonymous" /> -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
 
     <title>What to Watch!</title>
 
@@ -24,14 +27,14 @@
     <header class="hero heroimg">
         <div class="hero-body">
             <div class="container">
-              <h1 class="title">
-                What to Watch
-              </h1>
-              <h2 class="subtitle">
-                The Ultimate Movie Guide
-              </h2>
+                <h1 class="title">
+                    What to Watch
+                </h1>
+                <h2 class="subtitle">
+                    The Ultimate Movie Guide
+                </h2>
             </div>
-          </div>
+        </div>
     </header>
 
 
@@ -39,68 +42,53 @@
     <main>
 
         <div class="row">
-
             <!-- Search Option Column -->
-            <div class="col s2">Search Column
-                <div>Search Criteria 1</div>
-                <div>Search Criteria 2</div>
-                <div>Search Criteria 3</div>
-                <div>Search Criteria 4</div>
-                <div>Search Criteria 5</div>
+            <div class="col s3 options-side">
+                <div class="genre">
+                    <form id="genre-form" action="#">
+                    </form>
+                </div>
+                <div class="range-selector">
+
+                    <form action="#">
+                        <p class="range-field">
+                            Number of movies <br>
+                            <input type="range" id="number-results" min="0" max="10" value="5" /><span
+                                id="span-number-results">5 Results</span>
+                        </p>
+                    </form>
+                    <button class="waves-effect waves-light btn-large" id="get-results">Search Movies</button>
+                </div>
             </div>
+            <div class="col s9 display-side">
+                <div class="container display-contianer">
+                    <div class="row selected-row">
+                        <div class="col s12 selected-column">
+                            <div class="selected-movie">
+                                <!-- <div class="selected-title"></div>
+                                    <div class="poster"></div>
+                                    <div class="selected-info"></div> -->
 
 
-            <!-- Movie Display Section -->
-            <div class="col s10">
+                            </div>
+                        </div>
+                        <div class="row options-row">
+                            <div class="col s12 options-column">
+                                <div class="simmilar-choices">
 
-                <!-- Focused Movie Section -->
-                <div class="row">
+                                </div>
 
-                    <!-- Movie Poster -->
-                    <div class="col s3">Movie Poster</div>
-
-
-                    <!-- Movie Description Section -->
-                    <div class="col s6">Movie Description Section</div>
-
-                        <!-- Movie Title and General Info -->
-                        <div class="row">
-                            <div class="row">Movie Title</div>
-                            <div class="row">
-                                <div class="col s1">Misc Movie Info 1</div>
-                                <div class="col s1">Misc Movie Info 2</div>
-                                <div class="col s1">Misc Movie Info 3</div>
-                                <div class="col s1">Misc Movie Info 4</div>
                             </div>
 
                         </div>
 
-                        <!-- Movie Description Text -->
-                        <div class="row">Movie Description Text</div>
-
-
-                    <!-- Movie Trailer -->
-                    <div class="col s3">Movie Trailer</div>
-
-
-                </div>
-
-
-                <!-- Movie Search Results Section -->
-                <div class="row">Movie Search Results
-
+                    </div>
                 </div>
 
             </div>
-
         </div>
-
-        
     </main>
 
-
-    <!-- Script Section -->
-    <script src="script.js"></script>
 
 </body>
 
