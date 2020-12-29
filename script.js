@@ -39,7 +39,7 @@ async function resolver() {
   // add items to html
   selectedMovieHTML(returnDiscovery[0]);
   let selectedSecondary = secondaryMovies(returnDiscovery);
-  clickedActions(selectedSecondary)
+  clickedActions(selectedSecondary,returnDiscovery[0])
 
 }
 
@@ -237,7 +237,7 @@ function checkboxGenre() {
   return stringQuery;
 }
 
-function clickedActions(items) {
+function clickedActions(items, firstItem) {
   let selected = document.querySelector(".simmilar-choices");
   let divs = Array.from(selected.querySelectorAll("div"))
   console.log(items)
