@@ -2,6 +2,7 @@
 api_key = "a942ead147c28026ed79eacf0354b7f0";
 let temp = null;
 let sliderValue = 5;
+let firstItem = null;
 
 window.onload = () => {
   onLoadAsync();
@@ -26,8 +27,10 @@ function slider() {
   let slide = document.getElementById("number-results");
   slide.oninput = () => {
     sliderValue = slide.value;
-    document.querySelector("#span-number-results").innerHTML = String(`${slide.value} Results`);
-    console.log(sliderValue)
+    document.querySelector("#span-number-results").innerHTML = (
+      `${(slide.value)} Results`
+    );
+    console.log(sliderValue);
   };
 }
 
@@ -37,36 +40,33 @@ async function resolver() {
   let returnDiscovery = await discoverCall(checkedResults);
 
   // add items to html
-  selectedMovieHTML(returnDiscovery[0]);
+  firstItem = returnDiscovery[0];
+  selectedMovieHTML(firstItem);
   let selectedSecondary = secondaryMovies(returnDiscovery);
-  clickedActions(selectedSecondary)
-
 }
 
 function selectedMovieHTML(data) {
   let selMovie = document.querySelector(".selected-movie");
   // clear old data
   while (selMovie.firstChild != null) {
-     selMovie.removeChild(selMovie.firstChild);
+    selMovie.removeChild(selMovie.firstChild);
   }
 
   //add title
 
-  let titleDiv = document.createElement("div")
-  titleDiv.setAttribute("class","selected-title")
-  selMovie.appendChild(titleDiv)
+  let titleDiv = document.createElement("div");
+  titleDiv.setAttribute("class", "selected-title");
+  selMovie.appendChild(titleDiv);
   let title = document.createElement("h2");
   title.setAttribute("class", "selected-movie-poster");
   title.innerText = data.title;
   titleDiv.appendChild(title);
 
-
-
   // add img
 
-  let posterDiv = document.createElement("div")
-  posterDiv.setAttribute("class","selected-poster")
-  selMovie.appendChild(posterDiv)
+  let posterDiv = document.createElement("div");
+  posterDiv.setAttribute("class", "selected-poster");
+  selMovie.appendChild(posterDiv);
   let poster = document.createElement("img");
   poster.setAttribute(
     "src",
@@ -74,14 +74,14 @@ function selectedMovieHTML(data) {
   );
   poster.setAttribute("class", "selected-movie-poster");
   // sizes for testing only update via css later
-  poster.style.height = "300px";
+  //poster.style.height = "300px";
   //poster.style.width = "200px"
   posterDiv.appendChild(poster);
 
   // info
-  let infoDiv = document.createElement("div")
-  infoDiv.setAttribute("class","selected-movie-info")
-  selMovie.appendChild(infoDiv)
+  let infoDiv = document.createElement("div");
+  infoDiv.setAttribute("class", "selected-movie-info");
+  selMovie.appendChild(infoDiv);
   overviewText = document.createElement("p");
   overviewText.innerText = String(data.overview);
   infoDiv.appendChild(overviewText);
@@ -90,45 +90,48 @@ function selectedMovieHTML(data) {
 function secondaryMovies(data) {
   let dataCopy = data;
   let chosenTitles = [];
-  let simmilarChoices = document.querySelector(".simmilar-choices");
 
   // splice out the already chosen element.
   dataCopy.splice(0, 1);
 
-  // clear old elements
-  while (simmilarChoices.firstChild != null) {
-    simmilarChoices.removeChild(simmilarChoices.firstChild);
-  }
-
-  // pull the number to select from the discovery defaulting to 5 for now.
+  // pull the number to select from the discovery based on the slider.
   for (let i = 0; i < sliderValue; i++) {
     let random = Math.floor(Math.random() * dataCopy.length);
 
     chosenTitles.push(dataCopy[random]);
 
-    let posterPath = dataCopy[random].poster_path;
+    // remove the choice so it is not selected again.
+    dataCopy.splice(random, 1);
+  }
+  secondaryMoviesHTML(chosenTitles, data);
+  return chosenTitles;
+}
 
-    //add html
+function secondaryMoviesHTML(selected) {
+  let simmilarChoices = document.querySelector(".simmilar-choices");
+  console.log(selected);
+
+  while (simmilarChoices.firstChild != null) {
+    simmilarChoices.removeChild(simmilarChoices.firstChild);
+  }
+  for (let i = 0; i < selected.length; i++) {
     let movieDiv = document.createElement("div");
     movieDiv.setAttribute("class", "movie-holder");
-    movieDiv.setAttribute("data-selection", i)
+    movieDiv.setAttribute("data-selection", i);
     simmilarChoices.appendChild(movieDiv);
-    let title = document.createElement("h3");
-    title.innerText = dataCopy[random].title;
+    let title = document.createElement("h5");
+    title.innerText = selected[i].title;
     movieDiv.appendChild(title);
 
     let poster = document.createElement("img");
     poster.setAttribute(
       "src",
-      `https://image.tmdb.org/t/p/original${posterPath}`
+      `https://image.tmdb.org/t/p/original${selected[i].poster_path}`
     );
-    poster.style.height = "100px";
+    //poster.style.height = "100px";
     movieDiv.appendChild(poster);
-
-    // remove the choice so it is not selected again.
-    dataCopy.splice(random, 1);
   }
-  return chosenTitles
+  clickedActions(selected);
 }
 
 function storedCheckedItems(checkboxItems) {
@@ -156,11 +159,8 @@ function getGenre(api_key) {
         let form = document.getElementById("genre-form");
 
         for (const elm of result.genres) {
-          let label = document.createElement("label")
-          form.appendChild(label)
-
-
-
+          let label = document.createElement("label");
+          form.appendChild(label);
 
           let input = document.createElement("input");
           input.setAttribute("type", "checkbox");
@@ -169,15 +169,12 @@ function getGenre(api_key) {
           input.setAttribute("value", elm.id);
           label.appendChild(input);
 
-          let span = document.createElement("span")
-          span.innerHTML = elm.name
-          label.appendChild(span)
+          let span = document.createElement("span");
+          span.innerHTML = elm.name;
+          label.appendChild(span);
 
-          let br = document.createElement("br")
-          form.appendChild(br)
-
-
-
+          let br = document.createElement("br");
+          form.appendChild(br);
 
           //let label = document.createElement("label");
           // label.setAttribute("for", elm.name);
@@ -239,14 +236,25 @@ function checkboxGenre() {
 
 function clickedActions(items) {
   let selected = document.querySelector(".simmilar-choices");
-  let divs = Array.from(selected.querySelectorAll("div"))
+  let divs = Array.from(selected.querySelectorAll("div"));
 
   for (let i = 0; i < divs.length; i++) {
     divs[i].addEventListener("click", function () {
-      console.log("image pressed")
-      console.log(divs[i].dataset.selection)
-    })
+      let selected = divs[i].dataset.selection;
+      let priorSelection = firstItem;
+      firstItem = items[selected];
+      selectedMovieHTML(firstItem);
+
+      // swap the position in the array for the prior selected item.
+      items.splice(selected, 1, priorSelection);
+      secondaryMoviesHTML(items);
+
+      // temp scroll to top
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
+    });
   }
-
-
 }
