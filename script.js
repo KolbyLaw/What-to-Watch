@@ -26,8 +26,10 @@ function slider() {
   let slide = document.getElementById("number-results");
   slide.oninput = () => {
     sliderValue = slide.value;
-    document.querySelector("#span-number-results").innerHTML = String(`${slide.value} Results`);
-    console.log(sliderValue)
+    document.querySelector("#span-number-results").innerHTML = String(
+      `${slide.value} Results`
+    );
+    console.log(sliderValue);
   };
 }
 
@@ -39,34 +41,31 @@ async function resolver() {
   // add items to html
   selectedMovieHTML(returnDiscovery[0]);
   let selectedSecondary = secondaryMovies(returnDiscovery);
-  clickedActions(selectedSecondary,returnDiscovery[0])
-
+  clickedActions(selectedSecondary, returnDiscovery[0]);
 }
 
 function selectedMovieHTML(data) {
   let selMovie = document.querySelector(".selected-movie");
   // clear old data
   while (selMovie.firstChild != null) {
-     selMovie.removeChild(selMovie.firstChild);
+    selMovie.removeChild(selMovie.firstChild);
   }
 
   //add title
 
-  let titleDiv = document.createElement("div")
-  titleDiv.setAttribute("class","selected-title")
-  selMovie.appendChild(titleDiv)
+  let titleDiv = document.createElement("div");
+  titleDiv.setAttribute("class", "selected-title");
+  selMovie.appendChild(titleDiv);
   let title = document.createElement("h2");
   title.setAttribute("class", "selected-movie-poster");
   title.innerText = data.title;
   titleDiv.appendChild(title);
 
-
-
   // add img
 
-  let posterDiv = document.createElement("div")
-  posterDiv.setAttribute("class","selected-poster")
-  selMovie.appendChild(posterDiv)
+  let posterDiv = document.createElement("div");
+  posterDiv.setAttribute("class", "selected-poster");
+  selMovie.appendChild(posterDiv);
   let poster = document.createElement("img");
   poster.setAttribute(
     "src",
@@ -79,9 +78,9 @@ function selectedMovieHTML(data) {
   posterDiv.appendChild(poster);
 
   // info
-  let infoDiv = document.createElement("div")
-  infoDiv.setAttribute("class","selected-movie-info")
-  selMovie.appendChild(infoDiv)
+  let infoDiv = document.createElement("div");
+  infoDiv.setAttribute("class", "selected-movie-info");
+  selMovie.appendChild(infoDiv);
   overviewText = document.createElement("p");
   overviewText.innerText = String(data.overview);
   infoDiv.appendChild(overviewText);
@@ -95,55 +94,31 @@ function secondaryMovies(data) {
   // splice out the already chosen element.
   dataCopy.splice(0, 1);
 
-  // clear old elements
-  // while (simmilarChoices.firstChild != null) {
-  //   simmilarChoices.removeChild(simmilarChoices.firstChild);
-  // }
-
+ 
   // pull the number to select from the discovery defaulting to 5 for now.
   for (let i = 0; i < sliderValue; i++) {
     let random = Math.floor(Math.random() * dataCopy.length);
 
     chosenTitles.push(dataCopy[random]);
 
-    //let posterPath = dataCopy[random].poster_path;
-
-    //add html
-    // let movieDiv = document.createElement("div");
-    // movieDiv.setAttribute("class", "movie-holder");
-    // movieDiv.setAttribute("data-selection", i)
-    // simmilarChoices.appendChild(movieDiv);
-    // let title = document.createElement("h3");
-    // title.innerText = dataCopy[random].title;
-    // movieDiv.appendChild(title);
-
-    // let poster = document.createElement("img");
-    // poster.setAttribute(
-    //   "src",
-    //   `https://image.tmdb.org/t/p/original${posterPath}`
-    // );
-    // poster.style.height = "100px";
-    // movieDiv.appendChild(poster);
-
     // remove the choice so it is not selected again.
     dataCopy.splice(random, 1);
   }
-  secondaryMoviesHTML(chosenTitles)
-  return chosenTitles
+  secondaryMoviesHTML(chosenTitles);
+  return chosenTitles;
 }
 
 function secondaryMoviesHTML(selected) {
   let simmilarChoices = document.querySelector(".simmilar-choices");
-  console.log(selected)
-  
+  console.log(selected);
+
   while (simmilarChoices.firstChild != null) {
     simmilarChoices.removeChild(simmilarChoices.firstChild);
   }
-  for(let i = 0; i<selected.length; i++) {
-    
+  for (let i = 0; i < selected.length; i++) {
     let movieDiv = document.createElement("div");
     movieDiv.setAttribute("class", "movie-holder");
-    movieDiv.setAttribute("data-selection", i)
+    movieDiv.setAttribute("data-selection", i);
     simmilarChoices.appendChild(movieDiv);
     let title = document.createElement("h5");
     title.innerText = selected[i].title;
@@ -156,10 +131,7 @@ function secondaryMoviesHTML(selected) {
     );
     poster.style.height = "100px";
     movieDiv.appendChild(poster);
-    
-
   }
-
 }
 
 function storedCheckedItems(checkboxItems) {
@@ -187,11 +159,8 @@ function getGenre(api_key) {
         let form = document.getElementById("genre-form");
 
         for (const elm of result.genres) {
-          let label = document.createElement("label")
-          form.appendChild(label)
-
-
-
+          let label = document.createElement("label");
+          form.appendChild(label);
 
           let input = document.createElement("input");
           input.setAttribute("type", "checkbox");
@@ -200,15 +169,12 @@ function getGenre(api_key) {
           input.setAttribute("value", elm.id);
           label.appendChild(input);
 
-          let span = document.createElement("span")
-          span.innerHTML = elm.name
-          label.appendChild(span)
+          let span = document.createElement("span");
+          span.innerHTML = elm.name;
+          label.appendChild(span);
 
-          let br = document.createElement("br")
-          form.appendChild(br)
-
-
-
+          let br = document.createElement("br");
+          form.appendChild(br);
 
           //let label = document.createElement("label");
           // label.setAttribute("for", elm.name);
@@ -270,16 +236,13 @@ function checkboxGenre() {
 
 function clickedActions(items, firstItem) {
   let selected = document.querySelector(".simmilar-choices");
-  let divs = Array.from(selected.querySelectorAll("div"))
-  console.log(items)
+  let divs = Array.from(selected.querySelectorAll("div"));
+  console.log(items);
 
   for (let i = 0; i < divs.length; i++) {
     divs[i].addEventListener("click", function () {
-      let selected = divs[i].dataset.selection
-      selectedMovieHTML(items[(selected)])
-
-    })
+      let selected = divs[i].dataset.selection;
+      selectedMovieHTML(items[selected]);
+    });
   }
-
-
 }

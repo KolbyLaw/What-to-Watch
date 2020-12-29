@@ -13,3 +13,17 @@
     background-color: lightblue;
     cursor: pointer;
 }
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.moviedb-attribution {
+    display:flex;
+    justify-content: center;
+}
+
+.moviedb-attribution img{
+    height: 15px;
+}
