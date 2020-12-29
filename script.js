@@ -26,7 +26,8 @@ function slider() {
   let slide = document.getElementById("number-results");
   slide.oninput = () => {
     sliderValue = slide.value;
-    document.getElementById("span-number-results").innerHTML = slide.value;
+    document.querySelector("#span-number-results").innerHTML = String(`${slide.value} Results`);
+    console.log(sliderValue)
   };
 }
 
@@ -37,21 +38,27 @@ async function resolver() {
 
   // add items to html
   selectedMovieHTML(returnDiscovery[0]);
-  secondaryMovies(returnDiscovery);
+  let selectedSecondary = secondaryMovies(returnDiscovery);
+  clickedActions(selectedSecondary)
+  
 }
 
 function selectedMovieHTML(data) {
   let selMovie = document.querySelector(".selected-movie");
   // clear old data
-  while (selMovie.firstChild != null) {
-    selMovie.removeChild(selMovie.firstChild);
-  }
+  // while (selMovie.firstChild != null) {
+  //   selMovie.removeChild(selMovie.firstChild);
+  // }
 
   //add title
+  let titleDiv = document.querySelector(".selected-title")
   let title = document.createElement("h2");
   title.setAttribute("class", "selected-movie-poster");
   title.innerText = data.title;
-  selMovie.appendChild(title);
+  titleDiv.appendChild(title);
+
+
+
   // add img
   let poster = document.createElement("img");
   poster.setAttribute(
@@ -93,6 +100,7 @@ function secondaryMovies(data) {
     //add html
     let movieDiv = document.createElement("div");
     movieDiv.setAttribute("class", "movie-holder");
+    movieDiv.setAttribute("data-selection", i)
     simmilarChoices.appendChild(movieDiv);
     let title = document.createElement("h3");
     title.innerText = dataCopy[random].title;
@@ -109,6 +117,7 @@ function secondaryMovies(data) {
     // remove the choice so it is not selected again.
     dataCopy.splice(random, 1);
   }
+  return chosenTitles
 }
 
 function storedCheckedItems(checkboxItems) {
@@ -136,16 +145,33 @@ function getGenre(api_key) {
         let form = document.getElementById("genre-form");
 
         for (const elm of result.genres) {
+          let label = document.createElement("label")
+          form.appendChild(label)
+
+        
+
+
           let input = document.createElement("input");
           input.setAttribute("type", "checkbox");
           input.setAttribute("id", elm.name);
           input.setAttribute("name", elm.name);
           input.setAttribute("value", elm.id);
-          form.appendChild(input);
-          let label = document.createElement("label");
-          label.setAttribute("for", elm.name);
-          label.innerText = elm.name;
-          form.appendChild(label);
+          label.appendChild(input);
+          
+          let span = document.createElement("span")
+          span.innerHTML = elm.name
+          label.appendChild(span)
+
+          let br = document.createElement("br")
+          form.appendChild(br)
+
+
+
+
+          //let label = document.createElement("label");
+          // label.setAttribute("for", elm.name);
+          // label.innerText = elm.name;
+          // form.appendChild(label);
         }
 
         resolve(form);
@@ -198,4 +224,18 @@ function checkboxGenre() {
   }
 
   return stringQuery;
+}
+
+function clickedActions (items) {
+  let selected = document.querySelector(".simmilar-choices");
+  let divs = Array.from(selected.querySelectorAll("div"))
+
+  for(let i = 0; i<divs.length; i++){
+    divs[i].addEventListener("click",function(){
+      console.log("image pressed")
+      console.log(divs[i].dataset.selection)
+    })
+  }
+
+
 }

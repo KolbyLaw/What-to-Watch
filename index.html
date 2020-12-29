@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="./assets/css/style.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" integrity="sha512-ZRv40llEogRmoWgZwnsqke3HNzJ0kiI0+pcMgiz2bxO6Ew1DVBtWjVn0qjrXdT3+u+pSN36gLgmJiiQ3cQtyzA==" crossorigin="anonymous" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" integrity="sha512-ZRv40llEogRmoWgZwnsqke3HNzJ0kiI0+pcMgiz2bxO6Ew1DVBtWjVn0qjrXdT3+u+pSN36gLgmJiiQ3cQtyzA==" crossorigin="anonymous" /> -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 
+  
     <title>What to Watch!</title>
 
 </head>
@@ -41,12 +44,28 @@
         <div class="row">
 
             <!-- Search Option Column -->
-            <div class="col s2">Search Column
-                <div>Search Criteria 1</div>
-                <div>Search Criteria 2</div>
-                <div>Search Criteria 3</div>
+            <div class="col s2 search-column">
+                <div class="genre">
+                    <form id="genre-form" action="#">
+                    </form>
+                </div>                
+                <div class="range-selector">
+                    
+                    <form action="#">
+                        <p class="range-field">
+                            Number of movies <br>
+                          <input type="range" id="number-results" min="0" max="10" value="5"/><span id="span-number-results">5 Results</span>
+                        </p>
+                      </form>
+                        
+                    
+                </div>
+                <!-- <div>Search Criteria 3</div>
                 <div>Search Criteria 4</div>
-                <div>Search Criteria 5</div>
+                <div>Search Criteria 5</div> -->
+
+                <button class="waves-effect waves-light btn-large" id="get-results">Search Movies</button>
+            </div>
             </div>
 
 
@@ -54,10 +73,10 @@
             <div class="col s10">
 
                 <!-- Focused Movie Section -->
-                <div class="row">
+                <div class="row selected-movie">
 
                     <!-- Movie Poster -->
-                    <div class="col s3">Movie Poster</div>
+                    <div class="col s3 poster">Movie Poster</div>
 
 
                     <!-- Movie Description Section -->
@@ -65,8 +84,9 @@
 
                         <!-- Movie Title and General Info -->
                         <div class="row">
-                            <div class="row">Movie Title</div>
-                            <div class="row">
+                            <div class="row selected-title">Movie Title</div>
+
+                            <div class="row misc movie info">
                                 <div class="col s1">Misc Movie Info 1</div>
                                 <div class="col s1">Misc Movie Info 2</div>
                                 <div class="col s1">Misc Movie Info 3</div>
@@ -100,7 +120,7 @@
 
 
     <!-- Script Section -->
-    <script src="script.js"></script>
+    
 
 </body>
 
