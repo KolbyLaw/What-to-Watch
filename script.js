@@ -74,7 +74,7 @@ function selectedMovieHTML(data) {
   );
   poster.setAttribute("class", "selected-movie-poster");
   // sizes for testing only update via css later
-  poster.style.height = "300px";
+  //poster.style.height = "300px";
   //poster.style.width = "200px"
   posterDiv.appendChild(poster);
 
