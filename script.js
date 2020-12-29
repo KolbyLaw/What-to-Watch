@@ -240,11 +240,13 @@ function checkboxGenre() {
 function clickedActions(items) {
   let selected = document.querySelector(".simmilar-choices");
   let divs = Array.from(selected.querySelectorAll("div"))
+  console.log(items)
 
   for (let i = 0; i < divs.length; i++) {
     divs[i].addEventListener("click", function () {
-      console.log("image pressed")
-      console.log(divs[i].dataset.selection)
+      let selected = divs[i].dataset.selection
+      selectedMovieHTML(items[(selected)])
+
     })
   }
 
