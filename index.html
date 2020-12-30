@@ -45,15 +45,29 @@
           <div class="range-selector">
             <form action="#">
               <p class="range-field">
-                addtional selections <br />
+                addtional selections <span id="span-number-results">5 Results</span><br />
                 <input
                   type="range"
                   id="number-results"
                   min="0"
                   max="10"
                   value="5"
-                /><span id="span-number-results">5 Results</span>
+                />
+
               </p>
+            </form>
+            <form action="#">
+                <p class="range-field">
+                    <br>
+                    User Rating<span id="span-rating-result"> 0 > </span> <br>
+                    <input
+                    type="range"
+                    id="rating-number"
+                    min="0"
+                    max="9"
+                    value="0">
+
+                </p>
             </form>
             <button class="waves-effect waves-light btn-large" id="get-results">
               Search Movies
