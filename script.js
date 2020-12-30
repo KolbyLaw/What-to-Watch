@@ -3,6 +3,7 @@ api_key = "a942ead147c28026ed79eacf0354b7f0";
 let temp = null;
 let sliderValue = 5;
 let firstItem = null;
+let ratingValue = 0;
 
 window.onload = () => {
   onLoadAsync();
@@ -10,6 +11,7 @@ window.onload = () => {
   async function onLoadAsync() {
     // function to get values and update slider
     slider();
+    ratingSlider();
 
     // get supported Genres from service on page load
     let genereCheckboxs = await getGenre(api_key);
@@ -30,8 +32,17 @@ function slider() {
     document.querySelector("#span-number-results").innerHTML = (
       `${(slide.value)} Results`
     );
-    console.log(sliderValue);
+
   };
+}
+
+function ratingSlider() {
+  let ratingSlide = document.getElementById("rating-number");
+  ratingSlide.oninput = () => {
+    ratingValue = ratingSlide.value;
+    document.querySelector("#span-rating-result").innerText = (` ${ratingValue} >`)
+
+  }
 }
 
 // complete everything in order when button is pressed
@@ -85,6 +96,11 @@ function selectedMovieHTML(data) {
   overviewText = document.createElement("p");
   overviewText.innerText = String(data.overview);
   infoDiv.appendChild(overviewText);
+
+  // rating
+  let rating = document.createElement("p")
+  rating.innerText = String(`Rating: ${data.vote_average}`)
+  infoDiv.appendChild(rating)
 }
 
 function secondaryMovies(data) {
@@ -193,7 +209,7 @@ function getGenre(api_key) {
 function discoverCall(genreList) {
   return new Promise(function (resolve, reject) {
     // api does not accept form data so using URL manipulation.
-    let urlQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc${genreList}`;
+    let urlQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc${genreList}&vote_average.gte=${ratingValue}`;
 
     fetch(urlQuery)
       .then((response) => response.json())
