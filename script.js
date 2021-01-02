@@ -123,6 +123,8 @@ function secondaryMovies(data) {
   return chosenTitles;
 }
 
+
+// Possibly create cards for movie results
 function secondaryMoviesHTML(selected) {
   let simmilarChoices = document.querySelector(".simmilar-choices");
   console.log(selected);
