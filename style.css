@@ -9,9 +9,18 @@
     padding: 5%;
 }
 
-.movie-holder img {
-    height: 15rem;
-}
+/* .card-image {
+    width: auto;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+} */
+
+
+
+
 
 .movie-holder:hover{
     background-color: lightblue;
