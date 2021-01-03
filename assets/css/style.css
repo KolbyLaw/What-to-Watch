@@ -1,3 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.selected-poster img{
+    height: 30rem;
+    padding: 5%;
+}
+
+
 .heroimg {
     background-image: url("../images/hero-bg.jpg");
     background-size: cover;
@@ -6,6 +18,26 @@
     background-position: 50%;
 }
 
+
+.movie-holder:hover{
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.moviedb-attribution {
+    display:flex;
+    justify-content: center;
+}
+
+.moviedb-attribution img{
+    height: 15px;
+}
 /* .body {
     padding: 0px;
     margin: 0px;
