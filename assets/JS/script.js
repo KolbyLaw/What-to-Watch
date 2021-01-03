@@ -5,6 +5,7 @@ let sliderValue = 5;
 let firstItem = null;
 let ratingValue = 0;
 
+
 window.onload = () => {
   onLoadAsync();
 
@@ -52,8 +53,58 @@ async function resolver() {
 
   // add items to html
   firstItem = returnDiscovery[0];
+    
   selectedMovieHTML(firstItem);
   let selectedSecondary = secondaryMovies(returnDiscovery);
+}
+
+function selectedMovieTrailer(data) {
+  
+  fetch(`https://api.themoviedb.org/3/movie/${data}/videos?api_key=${api_key}&language=en-US`)
+  .then(response => {
+    if(response.ok){
+      return response.json()
+    }else{
+      return [];
+    }
+    
+
+  })
+  .then(result => { 
+    
+      // see documentation at https://developers.google.com/youtube/player_parameters
+
+      // This function creates an <iframe> (and YouTube player)
+      var player;
+      onYouTubeIframeAPIReady()
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '240',
+          width: '360',
+          videoId: String(result["results"][0].key),
+          events: {
+            
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }     
+
+       // The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {          
+          done = true;
+        }
+      } 
+      
+  })
+  .catch(error => {
+    console.log(error)
+  });
+
+  
 }
 
 function selectedMovieHTML(data) {
@@ -90,8 +141,14 @@ function selectedMovieHTML(data) {
   <br>
   <p>User Rating: ${String(data.vote_average)}⭐</p>
   <p>Release Date: ${String(data.release_date)}</p>
+  <div id="player"><div>  
   
   `)
+
+  
+  selectedMovieTrailer(String(data.id))  
+
+  
 
 }
 
@@ -119,7 +176,6 @@ function secondaryMovies(data) {
 // Possibly create cards for movie results
 function secondaryMoviesHTML(selected) {
   let simmilarChoices = document.querySelector(".simmilar-choices");
-  console.log(selected);
 
   while (simmilarChoices.firstChild != null) {
     simmilarChoices.removeChild(simmilarChoices.firstChild);
@@ -267,12 +323,10 @@ function checkboxGenre() {
 function clickedActions(items) {
   let selectedDiv = document.querySelector(".simmilar-choices");
   let divs = Array.from(selectedDiv.querySelectorAll(".movie-holder"));
-  console.log(divs)
 
   for (let i = 0; i < divs.length; i++) {
     divs[i].addEventListener("click", function () {
       let selected = divs[i].dataset.selection;
-      console.log(selected)
       let priorSelection = firstItem;
       firstItem = items[selected];
       selectedMovieHTML(firstItem);
