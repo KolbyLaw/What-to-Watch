@@ -78,8 +78,10 @@ function selectedMovieHTML(data) {
 
   // card info
   let cardStacked = document.createElement("div");
+  cardStacked.classList.add("card-stacked")
   card.appendChild(cardStacked);
   let cardContent = document.createElement("div")
+  cardContent.classList.add("card-content")
   cardStacked.appendChild(cardContent);
 
   cardContent.innerHTML = (`
@@ -87,6 +89,7 @@ function selectedMovieHTML(data) {
   <p>${String(data.overview)}</p>
   <br>
   <p>User Rating: ${String(data.vote_average)}⭐</p>
+  <p>Release Date: ${String(data.release_date)}</p>
   
   `)
 
@@ -128,7 +131,7 @@ function secondaryMoviesHTML(selected) {
     //card
     let movieDiv = document.createElement("div");
     //movieDiv.setAttribute("class", "movie-holder");
-    movieDiv.classList.add("movie-holder", "card", "horizontal")
+    movieDiv.classList.add("movie-holder", "card", "horizontal", "col", "l6")
     movieDiv.setAttribute("data-selection", i);
     simmilarChoices.appendChild(movieDiv);
 
