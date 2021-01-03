@@ -90,42 +90,6 @@ function selectedMovieHTML(data) {
   
   `)
 
-  // let titleDiv = document.createElement("div");
-  // titleDiv.setAttribute("class", "selected-title");
-  // selMovie.appendChild(titleDiv);
-  // let title = document.createElement("h2");
-  // title.setAttribute("class", "selected-movie-poster");
-  // title.innerText = data.title;
-  // titleDiv.appendChild(title);
-
-  // // add img
-
-  // let posterDiv = document.createElement("div");
-  // posterDiv.setAttribute("class", "selected-poster");
-  // selMovie.appendChild(posterDiv);
-  // let poster = document.createElement("img");
-  // poster.setAttribute(
-  //   "src",
-  //   `https://image.tmdb.org/t/p/original${String(data.poster_path)}`
-  // );
-  // poster.setAttribute("class", "selected-movie-poster");
-  // // sizes for testing only update via css later
-  // //poster.style.height = "300px";
-  // //poster.style.width = "200px"
-  // posterDiv.appendChild(poster);
-
-  // // info
-  // let infoDiv = document.createElement("div");
-  // infoDiv.setAttribute("class", "selected-movie-info");
-  // selMovie.appendChild(infoDiv);
-  // overviewText = document.createElement("p");
-  // overviewText.innerText = String(data.overview);
-  // infoDiv.appendChild(overviewText);
-
-  // // rating
-  // let rating = document.createElement("p")
-  // rating.innerText = String(`Rating: ${data.vote_average}`)
-  // infoDiv.appendChild(rating)
 }
 
 function secondaryMovies(data) {
