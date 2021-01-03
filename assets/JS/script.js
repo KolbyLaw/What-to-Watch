@@ -29,10 +29,9 @@ function slider() {
   let slide = document.getElementById("number-results");
   slide.oninput = () => {
     sliderValue = slide.value;
-    document.querySelector("#span-number-results").innerHTML = (
-      `${(slide.value)} Results`
-    );
-
+    document.querySelector(
+      "#span-number-results"
+    ).innerHTML = `${slide.value} Results`;
   };
 }
 
@@ -40,9 +39,10 @@ function ratingSlider() {
   let ratingSlide = document.getElementById("rating-number");
   ratingSlide.oninput = () => {
     ratingValue = ratingSlide.value;
-    document.querySelector("#span-rating-result").innerText = (` ${ratingValue} >`)
-
-  }
+    document.querySelector(
+      "#span-rating-result"
+    ).innerText = ` ${ratingValue} >`;
+  };
 }
 
 // complete everything in order when button is pressed
@@ -52,8 +52,52 @@ async function resolver() {
 
   // add items to html
   firstItem = returnDiscovery[0];
+
   selectedMovieHTML(firstItem);
   let selectedSecondary = secondaryMovies(returnDiscovery);
+}
+
+function selectedMovieTrailer(data) {
+  fetch(
+    `https://api.themoviedb.org/3/movie/${data}/videos?api_key=${api_key}&language=en-US`
+  )
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return [];
+      }
+    })
+    .then((result) => {
+      // see documentation at https://developers.google.com/youtube/player_parameters
+
+      // This function creates an <iframe> (and YouTube player)
+      var player;
+      onYouTubeIframeAPIReady();
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player("player", {
+          height: "240",
+          width: "360",
+          videoId: String(result["results"][0].key),
+          events: {
+            onStateChange: onPlayerStateChange,
+          },
+        });
+      }
+
+      // The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          done = true;
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 function selectedMovieHTML(data) {
@@ -63,44 +107,41 @@ function selectedMovieHTML(data) {
     selMovie.removeChild(selMovie.firstChild);
   }
 
-  //add title
+  // card
+  let card = document.createElement("div");
+  card.classList.add("card", "horizontal");
+  selMovie.append(card);
 
-  let titleDiv = document.createElement("div");
-  titleDiv.setAttribute("class", "selected-title");
-  selMovie.appendChild(titleDiv);
-  let title = document.createElement("h2");
-  title.setAttribute("class", "selected-movie-poster");
-  title.innerText = data.title;
-  titleDiv.appendChild(title);
-
-  // add img
-
-  let posterDiv = document.createElement("div");
-  posterDiv.setAttribute("class", "selected-poster");
-  selMovie.appendChild(posterDiv);
-  let poster = document.createElement("img");
-  poster.setAttribute(
+  // card image
+  let cardImageDiv = document.createElement("div");
+  cardImageDiv.classList.add("card-image");
+  card.appendChild(cardImageDiv);
+  let cardImage = document.createElement("img");
+  cardImage.setAttribute(
     "src",
     `https://image.tmdb.org/t/p/original${String(data.poster_path)}`
   );
-  poster.setAttribute("class", "selected-movie-poster");
-  // sizes for testing only update via css later
-  //poster.style.height = "300px";
-  //poster.style.width = "200px"
-  posterDiv.appendChild(poster);
+  cardImageDiv.appendChild(cardImage);
 
-  // info
-  let infoDiv = document.createElement("div");
-  infoDiv.setAttribute("class", "selected-movie-info");
-  selMovie.appendChild(infoDiv);
-  overviewText = document.createElement("p");
-  overviewText.innerText = String(data.overview);
-  infoDiv.appendChild(overviewText);
+  // card info
+  let cardStacked = document.createElement("div");
+  cardStacked.classList.add("card-stacked");
+  card.appendChild(cardStacked);
+  let cardContent = document.createElement("div");
+  cardContent.classList.add("card-content");
+  cardStacked.appendChild(cardContent);
 
-  // rating
-  let rating = document.createElement("p")
-  rating.innerText = String(`Rating: ${data.vote_average}`)
-  infoDiv.appendChild(rating)
+  cardContent.innerHTML = `
+  <h4>${String(data.title)}</h4>
+  <p>${String(data.overview)}</p>
+  <br>
+  <p>User Rating: ${String(data.vote_average)}⭐</p>
+  <p>Release Date: ${String(data.release_date)}</p>
+  <div id="player"><div>  
+  
+  `;
+
+  selectedMovieTrailer(String(data.id));
 }
 
 function secondaryMovies(data) {
@@ -123,31 +164,47 @@ function secondaryMovies(data) {
   return chosenTitles;
 }
 
-
 // Possibly create cards for movie results
 function secondaryMoviesHTML(selected) {
   let simmilarChoices = document.querySelector(".simmilar-choices");
-  console.log(selected);
 
   while (simmilarChoices.firstChild != null) {
     simmilarChoices.removeChild(simmilarChoices.firstChild);
   }
+
   for (let i = 0; i < selected.length; i++) {
+    //card
     let movieDiv = document.createElement("div");
-    movieDiv.setAttribute("class", "movie-holder");
+    //movieDiv.setAttribute("class", "movie-holder");
+    movieDiv.classList.add("movie-holder", "card", "horizontal", "col", "l6");
     movieDiv.setAttribute("data-selection", i);
     simmilarChoices.appendChild(movieDiv);
-    let title = document.createElement("h5");
-    title.innerText = selected[i].title;
-    movieDiv.appendChild(title);
 
+    // stacked card div
+    let cardStacked = document.createElement("div");
+    cardStacked.classList.add("card-stacked");
+    movieDiv.appendChild(cardStacked);
+
+    // card content
+    let cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+    cardStacked.appendChild(cardContent);
+    let title = document.createElement("p");
+    //title.setAttribute("class","card-title")
+    title.innerText = selected[i].title;
+    cardContent.appendChild(title);
+
+    // card image
+    let cardImage = document.createElement("div");
+    cardImage.classList.add("card-image");
+    movieDiv.appendChild(cardImage);
     let poster = document.createElement("img");
     poster.setAttribute(
       "src",
       `https://image.tmdb.org/t/p/original${selected[i].poster_path}`
     );
     //poster.style.height = "100px";
-    movieDiv.appendChild(poster);
+    cardImage.appendChild(poster);
   }
   clickedActions(selected);
 }
@@ -253,8 +310,8 @@ function checkboxGenre() {
 }
 
 function clickedActions(items) {
-  let selected = document.querySelector(".simmilar-choices");
-  let divs = Array.from(selected.querySelectorAll("div"));
+  let selectedDiv = document.querySelector(".simmilar-choices");
+  let divs = Array.from(selectedDiv.querySelectorAll(".movie-holder"));
 
   for (let i = 0; i < divs.length; i++) {
     divs[i].addEventListener("click", function () {
@@ -271,7 +328,7 @@ function clickedActions(items) {
       window.scroll({
         top: 0,
         left: 0,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     });
   }
