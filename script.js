@@ -83,7 +83,7 @@ function selectedMovieHTML(data) {
   cardStacked.appendChild(cardContent);
 
   cardContent.innerHTML = (`
-  <h2>${String(data.title)}</h2>
+  <h4>${String(data.title)}</h4>
   <p>${String(data.overview)}</p>
   <br>
   <p>User Rating: ${String(data.vote_average)}⭐</p>
