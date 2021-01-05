@@ -1,9 +1,10 @@
 // global scope
 api_key = "a942ead147c28026ed79eacf0354b7f0";
 let temp = null;
+//TODO make our slider dynamic to have user select;
 let sliderValue = 5;
 let firstItem = null;
-let ratingValue = 0;
+let ratingValue = 9;
 
 window.onload = () => {
   onLoadAsync();
@@ -121,7 +122,10 @@ function selectedMovieHTML(data) {
     "src",
     `https://image.tmdb.org/t/p/original${String(data.poster_path)}`
   );
+
+  cardImageDiv.classList.add("fixed-image");
   cardImageDiv.appendChild(cardImage);
+  console.log(data);
 
   // card info
   let cardStacked = document.createElement("div");
