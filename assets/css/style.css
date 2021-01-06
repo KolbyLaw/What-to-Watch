@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #4b3c33;
+  font-weight: bold;
+}
+
+.selected-poster img {
+  height: 30rem;
+  padding: 5%;
+}
+
+.heroimg {
+  /* background-color: #7f5539; */
+  background-image: url("../images/hero-bg3.jpg");
+  background-size: cover;
+  /* background-position: center; */
+  background-attachment: fixed;
+  background-position: 50%;
+  /* border-style: solid; */
+  /* border-color: #7f5539; */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(131, 90, 14);
+}
+
+.movie-holder:hover {
+  background-color: #90e0ef;
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.moviedb-attribution {
+  display: flex;
+  justify-content: center;
+}
+
+.moviedb-attribution img {
+  height: 15px;
+}
+.fixed-image {
+  width: 550px;
+  height: auto;
+}
+
+/* .searchborder {
+  border-style: solid;
+  border-color: #9c6644;
+  background-color: #e6ccb2;
+  margin-left: 50px;
+} */
+
+.addselect {
+  font-size: 30px;
+  border-top-width: thick;
+  border-top: solid;
+  border-color: #4b3c33;
+  text-align: center;
+  padding: 10px;
+  margin-left: 20%;
+  margin-right: 20%;
+  
+}
+
+.border3 {
+  border-style: solid;
+  border-color: black;
+}
+
+.body {
+background-color: #f5ecec;
+}
+
+
+
+
+
+
+
+
+
+/* .control-secondary-results {
+  width: 100%;
+  padding: 0px;
+  margin: 0px; */
+
+/* .body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.heroimg {
+    background-color: #0096c7;
+
+}
+
+.hero-body {
+    background-color: #0096c7;
+    padding: 1px;
+} */
