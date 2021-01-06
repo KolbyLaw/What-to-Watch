@@ -26,12 +26,12 @@ What to Watch was built utilizing HTML, CSS, and JS, and utilized the Materializ
 #### LinkedIn: https://www.linkedin.com/in/mason-a-howe/ 
 <br>
 
-### Bo Daley - 
+### Bo Daley
 #### GitHub Profile: https://github.com/6bodaley6
 #### LinkedIn: https://www.linkedin.com/in/bo-daley-49054a1b1/ 
 <br>
 
-### Kolby Law - 
+### Kolby Law 
 #### GitHub: https://github.com/KolbyLaw 
 #### LinkedIn: https://www.linkedin.com/in/kolby-law-933615173/ 
 
