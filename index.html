@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,15 +25,14 @@
     <title>What to Watch!</title>
   </head>
 
-  <body>
+
+  <body class="body">
     <!-- Page Header START -->
     <header class="row hero heroimg">
       <div class="col s12 hero-body">
         <div class="container">
-          <h2 style="display: inline" class="title">What to Watch:</h2>
-          <h2 style="display: inline" class="subtitle">
-            The Ultimate Movie Guide
-          </h2>
+          <h1 class="title">What to Watch</h1>
+          <h2 class="subtitle">The Ultimate Movie Guide </h2>
         </div>
       </div>
     </header>
@@ -41,12 +41,13 @@
     <main>
       <div class="row">
         <!-- Search Option Column -->
-        <div class="col s1 options-side">
+        <div class="col s3 options-side searchborder">
           <!-- Genre Search-->
           <div class="genre">
             <form id="genre-form" action="#"></form>
           </div>
-
+          <br>
+          <br>
           <!-- Search Range Parameters -->
           <div class="range-selector">
             <!-- Number of Search Results -->
@@ -68,7 +69,7 @@
             <form action="#">
               <p class="range-field">
                 <br />
-                User Rating<span id="span-rating-result"> 9 > </span> <br />
+                User Rating:<span id="span-rating-result"> 5 > </span> <br />
                 <input
                   type="range"
                   id="rating-number"
@@ -86,14 +87,30 @@
         </div>
 
         <!-- Main Body Content START -->
-        <div class="col s7 display-side">
+        <div class="col s9 display-side">
           <div class="container display-contianer">
             <div class="row selected-row">
               <div class="col L12 selected-column selected-movie"></div>
             </div>
           </div>
         </div>
-        <div class="col s4 display-side">
+        <!-- <div class="col s4 display-side">
+          <div class="row options-row">
+            <div class="col s12 options-column">
+              <div class="simmilar-choices row"></div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+      <!-- Additional Selections Section -->
+      <div class="row">
+        <div class="addselect">
+          Additional Selections 
+      </div>
+      <div class="row">
+        <div class="col s12 display-side">
           <div class="row options-row">
             <div class="col s12 options-column">
               <div class="simmilar-choices row"></div>
@@ -101,6 +118,7 @@
           </div>
         </div>
       </div>
+      
     </main>
 
     <footer class="footer">
