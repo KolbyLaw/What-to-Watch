@@ -168,7 +168,8 @@ function secondaryMovies(data) {
   return chosenTitles;
 }
 
-// Possibly create cards for movie results
+
+// Secondary/Additional Movie Selection
 function secondaryMoviesHTML(selected) {
   let simmilarChoices = document.querySelector(".simmilar-choices");
 
@@ -180,25 +181,25 @@ function secondaryMoviesHTML(selected) {
     //card
     let movieDiv = document.createElement("div");
     //movieDiv.setAttribute("class", "movie-holder");
-    movieDiv.classList.add("movie-holder", "card", "horizontal", "col", "l6");
+    movieDiv.classList.add("movie-holder", "card", "col", "m4", "l2", "card-format");
     movieDiv.setAttribute("data-selection", i);
     simmilarChoices.appendChild(movieDiv);
 
-    // stacked card div
-    let cardStacked = document.createElement("div");
-    cardStacked.classList.add("card-stacked");
-    movieDiv.appendChild(cardStacked);
+            // // stacked card div
+            // let cardStacked = document.createElement("div");
+            // cardStacked.classList.add("card-stacked");
+            // movieDiv.appendChild(cardStacked);
 
-    // card content
-    let cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-    cardStacked.appendChild(cardContent);
-    let title = document.createElement("p");
-    //title.setAttribute("class","card-title")
-    title.innerText = selected[i].title;
-    cardContent.appendChild(title);
+            // // card content
+            // let cardContent = document.createElement("div");
+            // cardContent.classList.add("card-content");
+            // cardStacked.appendChild(cardContent);
+            // let title = document.createElement("p");
+            // //title.setAttribute("class","card-title")
+            // title.innerText = selected[i].title;
+            // cardContent.appendChild(title);
 
-    // card image
+    // Set Card Image
     let cardImage = document.createElement("div");
     cardImage.classList.add("card-image");
     movieDiv.appendChild(cardImage);
