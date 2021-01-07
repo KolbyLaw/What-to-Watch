@@ -8,7 +8,7 @@ What to Watch is your Ultimate Movie Guide! Built in 2020/2021 as a student proj
 <br><br>
 
 ## Information, Tools, and Acknowledgements
-What to Watch was built utilizing HTML, CSS, and JS, and utilized the Materialize CSS framework, as well as APIs offered by TheMovieDB and YouTube.
+What to Watch was built utilizing HTML, CSS, and JS, and incorporates the Materialize CSS framework, as well as APIs offered by TheMovieDB and YouTube.
 
 - Materialize: https://materializecss.com/ 
 - TheMovieDB API: https://developers.themoviedb.org/3/getting-started/introduction
