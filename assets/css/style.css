@@ -7,11 +7,6 @@
   font-weight: bold;
 }
 
-.selected-poster img {
-  height: 30rem;
-  padding: 5%;
-}
-
 .heroimg {
   background-image: url("../images/hero-bg3.jpg");
   background-size: cover;
@@ -19,14 +14,23 @@
   background-position: 50%;
 }
 
+.body {
+  background-color: #f5ecec;
+}
+
+.fixed-image {
+  width: 550px;
+  height: auto;
+}
+
+.selected-poster img {
+  height: 30rem;
+  padding: 5%;
+}
+
 .movie-holder:hover {
   background-color: #90e0ef;
   cursor: pointer;
-}
-
-.footer {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .moviedb-attribution {
@@ -36,11 +40,6 @@
 
 .moviedb-attribution img {
   height: 15px;
-}
-
-.fixed-image {
-  width: 550px;
-  height: auto;
 }
 
 .addselect {
@@ -54,17 +53,19 @@
   margin-right: 10%;
 }
 
-.body {
-  background-color: #f5ecec;
-}
-
 .card-format {
   text-align: center;
   font-size: large;
   border-style: solid;
   border-color: #f5ecec;
 }
-@media only screen and (max-width: 600px) {
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 768px) {
   .main-search-result-for-styling {
     width: 100%;
     display: flex;
