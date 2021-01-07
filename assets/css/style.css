@@ -3,8 +3,24 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-  color: #4b3c33;
+  color: #070707;
   font-weight: bold;
+}
+
+.heroimg {
+  background-image: url("../images/hero-bg3.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50%;
+}
+
+.body {
+  background-color: #f5ecec;
+}
+
+.fixed-image {
+  width: 550px;
+  height: auto;
 }
 
 .selected-poster img {
@@ -12,27 +28,9 @@
   padding: 5%;
 }
 
-.heroimg {
-  /* background-color: #7f5539; */
-  background-image: url("../images/hero-bg3.jpg");
-  background-size: cover;
-  /* background-position: center; */
-  background-attachment: fixed;
-  background-position: 50%;
-  /* border-style: solid; */
-  /* border-color: #7f5539; */
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: rgb(131, 90, 14);
-}
-
 .movie-holder:hover {
   background-color: #90e0ef;
   cursor: pointer;
-}
-
-.footer {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .moviedb-attribution {
@@ -43,17 +41,6 @@
 .moviedb-attribution img {
   height: 15px;
 }
-.fixed-image {
-  width: 550px;
-  height: auto;
-}
-
-/* .searchborder {
-  border-style: solid;
-  border-color: #9c6644;
-  background-color: #e6ccb2;
-  margin-left: 50px;
-} */
 
 .addselect {
   font-size: 30px;
@@ -62,44 +49,38 @@
   border-color: #4b3c33;
   text-align: center;
   padding: 10px;
-  margin-left: 20%;
-  margin-right: 20%;
-  
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
-.border3 {
+.card-format {
+  text-align: center;
+  font-size: large;
   border-style: solid;
-  border-color: black;
+  border-color: #f5ecec;
 }
 
-.body {
-background-color: #f5ecec;
+.footer {
+  display: flex;
+  justify-content: flex-end;
 }
 
-
-
-
-
-
-
-
-
-/* .control-secondary-results {
-  width: 100%;
-  padding: 0px;
-  margin: 0px; */
-
-/* .body {
-    padding: 0px;
-    margin: 0px;
+@media only screen and (max-width: 768px) {
+  .main-search-result-for-styling {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+  }
+  .selected-movie {
+    justify-content: center;
+    width: 100%;
+  }
+  .card-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-content h4 {
+    text-align: center;
+  }
 }
-
-.heroimg {
-    background-color: #0096c7;
-
-}
-
-.hero-body {
-    background-color: #0096c7;
-    padding: 1px;
-} */
