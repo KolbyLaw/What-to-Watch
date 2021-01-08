@@ -1,55 +1,86 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #070707;
+  font-weight: bold;
 }
-
-.selected-poster img{
-    height: 30rem;
-    padding: 5%;
-}
-
 
 .heroimg {
-    background-image: url("../images/hero-bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-position: 50%;
+  background-image: url("../images/hero-bg3.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50%;
 }
 
-
-.movie-holder:hover{
-    background-color: lightblue;
-    cursor: pointer;
+.body {
+  background-color: #f5ecec;
 }
 
+.fixed-image {
+  width: 550px;
+  height: auto;
+}
 
-.footer {
-    display: flex;
-    justify-content: flex-end;
+.selected-poster img {
+  height: 30rem;
+  padding: 5%;
+}
+
+.movie-holder:hover {
+  background-color: #90e0ef;
+  cursor: pointer;
 }
 
 .moviedb-attribution {
-    display:flex;
+  display: flex;
+  justify-content: center;
+}
+
+.moviedb-attribution img {
+  height: 15px;
+}
+
+.addselect {
+  font-size: 30px;
+  border-top-width: thick;
+  border-top: solid;
+  border-color: #4b3c33;
+  text-align: center;
+  padding: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.card-format {
+  text-align: center;
+  font-size: large;
+  border-style: solid;
+  border-color: #f5ecec;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 768px) {
+  .main-search-result-for-styling {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+  }
+  .selected-movie {
     justify-content: center;
+    width: 100%;
+  }
+  .card-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-content h4 {
+    text-align: center;
+  }
 }
-
-.moviedb-attribution img{
-    height: 15px;
-}
-/* .body {
-    padding: 0px;
-    margin: 0px;
-}
-
-.heroimg {
-    background-color: #0096c7;
-
-}
-
-.hero-body {
-    background-color: #0096c7;
-    padding: 1px;
-} */
-

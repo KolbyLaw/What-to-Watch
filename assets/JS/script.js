@@ -1,30 +1,34 @@
-// global scope
+// Global Scope
 api_key = "a942ead147c28026ed79eacf0354b7f0";
 let temp = null;
-let sliderValue = 5;
+let sliderValue = 3;
 let firstItem = null;
-let ratingValue = 0;
+let ratingValue = 5;
+
 
 window.onload = () => {
   onLoadAsync();
 
   async function onLoadAsync() {
-    // function to get values and update slider
+    // Function to get Values and update Slider
     slider();
     ratingSlider();
 
-    // get supported Genres from service on page load
+    // Load supported Genres on page launch
     let genereCheckboxs = await getGenre(api_key);
 
     storedCheckedItems(genereCheckboxs);
   }
 };
 
-// events
+
+// Events
 document.querySelector("#get-results").addEventListener("click", function () {
   resolver();
 });
 
+
+// Get Additional Selections Slider Value
 function slider() {
   let slide = document.getElementById("number-results");
   slide.oninput = () => {
@@ -35,6 +39,8 @@ function slider() {
   };
 }
 
+
+// Get User Rating Slider Value
 function ratingSlider() {
   let ratingSlide = document.getElementById("rating-number");
   ratingSlide.oninput = () => {
@@ -45,17 +51,19 @@ function ratingSlider() {
   };
 }
 
-// complete everything in order when button is pressed
+
+// Complete everything in order on button press
 async function resolver() {
   let checkedResults = checkboxGenre();
   let returnDiscovery = await discoverCall(checkedResults);
 
-  // add items to html
+  // Add items to HTML
   firstItem = returnDiscovery[0];
 
   selectedMovieHTML(firstItem);
   let selectedSecondary = secondaryMovies(returnDiscovery);
 }
+
 
 function selectedMovieTrailer(data) {
   fetch(
@@ -69,9 +77,9 @@ function selectedMovieTrailer(data) {
       }
     })
     .then((result) => {
-      // see documentation at https://developers.google.com/youtube/player_parameters
+      // See documentation at https://developers.google.com/youtube/player_parameters
 
-      // This function creates an <iframe> (and YouTube player)
+      // Create an <iframe> (and YouTube player)
       var player;
       onYouTubeIframeAPIReady();
       function onYouTubeIframeAPIReady() {
@@ -86,7 +94,7 @@ function selectedMovieTrailer(data) {
       }
 
       // The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
+      // The function indicates that when playing a video (state=1),
 
       var done = false;
       function onPlayerStateChange(event) {
@@ -100,19 +108,22 @@ function selectedMovieTrailer(data) {
     });
 }
 
+
+// Selected/Focused Movie Primary Function
 function selectedMovieHTML(data) {
   let selMovie = document.querySelector(".selected-movie");
-  // clear old data
+
+  // Clear old data
   while (selMovie.firstChild != null) {
     selMovie.removeChild(selMovie.firstChild);
   }
 
-  // card
+  // Setup Card
   let card = document.createElement("div");
-  card.classList.add("card", "horizontal");
+  card.classList.add("card", "horizontal", "main-search-result-for-styling");
   selMovie.append(card);
 
-  // card image
+  // Add Card Image
   let cardImageDiv = document.createElement("div");
   cardImageDiv.classList.add("card-image");
   card.appendChild(cardImageDiv);
@@ -121,9 +132,12 @@ function selectedMovieHTML(data) {
     "src",
     `https://image.tmdb.org/t/p/original${String(data.poster_path)}`
   );
-  cardImageDiv.appendChild(cardImage);
 
-  // card info
+  cardImageDiv.classList.add("fixed-image");
+  cardImageDiv.appendChild(cardImage);
+  console.log(data);
+
+  // Add Card Info
   let cardStacked = document.createElement("div");
   cardStacked.classList.add("card-stacked");
   card.appendChild(cardStacked);
@@ -136,7 +150,9 @@ function selectedMovieHTML(data) {
   <p>${String(data.overview)}</p>
   <br>
   <p>User Rating: ${String(data.vote_average)}⭐</p>
+  <br>
   <p>Release Date: ${String(data.release_date)}</p>
+  <br>
   <div id="player"><div>  
   
   `;
@@ -144,27 +160,29 @@ function selectedMovieHTML(data) {
   selectedMovieTrailer(String(data.id));
 }
 
+
 function secondaryMovies(data) {
   let dataCopy = data;
   let chosenTitles = [];
 
-  // splice out the already chosen element.
+  // Splice out the already chosen element
   dataCopy.splice(0, 1);
 
-  // pull the number to select from the discovery based on the slider.
+  // Pull the number to select from the discovery based on the slider
   for (let i = 0; i < sliderValue; i++) {
     let random = Math.floor(Math.random() * dataCopy.length);
 
     chosenTitles.push(dataCopy[random]);
 
-    // remove the choice so it is not selected again.
+    // Remove the choice so it is not selected again
     dataCopy.splice(random, 1);
   }
   secondaryMoviesHTML(chosenTitles, data);
   return chosenTitles;
 }
 
-// Possibly create cards for movie results
+
+// Secondary/Additional Movie Selection
 function secondaryMoviesHTML(selected) {
   let simmilarChoices = document.querySelector(".simmilar-choices");
 
@@ -173,28 +191,36 @@ function secondaryMoviesHTML(selected) {
   }
 
   for (let i = 0; i < selected.length; i++) {
-    //card
+
+    // Card Setup
     let movieDiv = document.createElement("div");
-    //movieDiv.setAttribute("class", "movie-holder");
-    movieDiv.classList.add("movie-holder", "card", "horizontal", "col", "l6");
+    movieDiv.classList.add(
+      "movie-holder",
+      "card",
+      "col",
+      "m4",
+      "l2",
+      "card-format"
+    );
+
     movieDiv.setAttribute("data-selection", i);
     simmilarChoices.appendChild(movieDiv);
 
-    // stacked card div
-    let cardStacked = document.createElement("div");
-    cardStacked.classList.add("card-stacked");
-    movieDiv.appendChild(cardStacked);
+    // // stacked card div
+    // let cardStacked = document.createElement("div");
+    // cardStacked.classList.add("card-stacked");
+    // movieDiv.appendChild(cardStacked);
 
-    // card content
-    let cardContent = document.createElement("div");
-    cardContent.classList.add("card-content");
-    cardStacked.appendChild(cardContent);
-    let title = document.createElement("p");
-    //title.setAttribute("class","card-title")
-    title.innerText = selected[i].title;
-    cardContent.appendChild(title);
+    // // card content
+    // let cardContent = document.createElement("div");
+    // cardContent.classList.add("card-content");
+    // cardStacked.appendChild(cardContent);
+    // let title = document.createElement("p");
+    // //title.setAttribute("class","card-title")
+    // title.innerText = selected[i].title;
+    // cardContent.appendChild(title);
 
-    // card image
+    // Set Card Image
     let cardImage = document.createElement("div");
     cardImage.classList.add("card-image");
     movieDiv.appendChild(cardImage);
@@ -203,12 +229,13 @@ function secondaryMoviesHTML(selected) {
       "src",
       `https://image.tmdb.org/t/p/original${selected[i].poster_path}`
     );
-    //poster.style.height = "100px";
     cardImage.appendChild(poster);
   }
   clickedActions(selected);
 }
 
+
+// Storage
 function storedCheckedItems(checkboxItems) {
   let itemsArray = Array.from(
     checkboxItems.querySelectorAll("input[type=checkbox]")
@@ -225,6 +252,7 @@ function storedCheckedItems(checkboxItems) {
     }
   }
 }
+
 
 function getGenre(api_key) {
   return new Promise(function (resolve, reject) {
@@ -265,9 +293,10 @@ function getGenre(api_key) {
   });
 }
 
+
 function discoverCall(genreList) {
   return new Promise(function (resolve, reject) {
-    // api does not accept form data so using URL manipulation.
+    // API does not accept form data so using URL manipulation.
     let urlQuery = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc${genreList}&vote_average.gte=${ratingValue}`;
 
     fetch(urlQuery)
@@ -281,20 +310,21 @@ function discoverCall(genreList) {
   });
 }
 
+
 function checkboxGenre() {
   let array = [];
 
-  //Select form and get all checked items.
+  // Select form and get all checked items.
   let genreForm = document.querySelector("#genre-form");
   let checkedItems = genreForm.querySelectorAll("input[type=checkbox]:checked");
 
-  // clear local storage before setting, Note do this as a json item later to prevent clearing all storage
+  // Clear Local Storage before setting. Note: do this as a JSON item later to prevent clearing all storage.
   localStorage.clear();
 
   for (const elm of checkedItems) {
     array.push(elm.value);
 
-    // set storage we will likely want to do this as a JSON item later but for now just individual values will be fine.
+    // Set Storage we will likely want to do this as a JSON item later but for now just individual values will be fine.
     localStorage.setItem(elm.name, "checked");
   }
 
@@ -309,6 +339,7 @@ function checkboxGenre() {
   return stringQuery;
 }
 
+
 function clickedActions(items) {
   let selectedDiv = document.querySelector(".simmilar-choices");
   let divs = Array.from(selectedDiv.querySelectorAll(".movie-holder"));
@@ -320,11 +351,11 @@ function clickedActions(items) {
       firstItem = items[selected];
       selectedMovieHTML(firstItem);
 
-      // swap the position in the array for the prior selected item.
+      // Swap the position in the array for the prior selected item.
       items.splice(selected, 1, priorSelection);
       secondaryMoviesHTML(items);
 
-      // temp scroll to top
+      // Temp scroll to top.
       window.scroll({
         top: 0,
         left: 0,
