@@ -206,20 +206,6 @@ function secondaryMoviesHTML(selected) {
     movieDiv.setAttribute("data-selection", i);
     simmilarChoices.appendChild(movieDiv);
 
-    // // stacked card div
-    // let cardStacked = document.createElement("div");
-    // cardStacked.classList.add("card-stacked");
-    // movieDiv.appendChild(cardStacked);
-
-    // // card content
-    // let cardContent = document.createElement("div");
-    // cardContent.classList.add("card-content");
-    // cardStacked.appendChild(cardContent);
-    // let title = document.createElement("p");
-    // //title.setAttribute("class","card-title")
-    // title.innerText = selected[i].title;
-    // cardContent.appendChild(title);
-
     // Set Card Image
     
       let cardImage = document.createElement("div");
