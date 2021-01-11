@@ -5,7 +5,6 @@ let sliderValue = 3;
 let firstItem = null;
 let ratingValue = 5;
 
-
 window.onload = () => {
   onLoadAsync();
 
@@ -21,12 +20,10 @@ window.onload = () => {
   }
 };
 
-
 // Events
 document.querySelector("#get-results").addEventListener("click", function () {
   resolver();
 });
-
 
 // Get Additional Selections Slider Value
 function slider() {
@@ -39,7 +36,6 @@ function slider() {
   };
 }
 
-
 // Get User Rating Slider Value
 function ratingSlider() {
   let ratingSlide = document.getElementById("rating-number");
@@ -50,7 +46,6 @@ function ratingSlider() {
     ).innerText = ` ${ratingValue} >`;
   };
 }
-
 
 // Complete everything in order on button press
 async function resolver() {
@@ -64,11 +59,10 @@ async function resolver() {
   let selectedSecondary = secondaryMovies(returnDiscovery);
 }
 
-
 function selectedMovieTrailer(data) {
   fetch(
-    `https://api.themoviedb.org/3/movie/${data}/videos?api_key=${api_key}&language=en-US`
-  )
+      `https://api.themoviedb.org/3/movie/${data}/videos?api_key=${api_key}&language=en-US`
+    )
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -82,6 +76,7 @@ function selectedMovieTrailer(data) {
       // Create an <iframe> (and YouTube player)
       var player;
       onYouTubeIframeAPIReady();
+
       function onYouTubeIframeAPIReady() {
         player = new YT.Player("player", {
           height: "240",
@@ -97,6 +92,7 @@ function selectedMovieTrailer(data) {
       // The function indicates that when playing a video (state=1),
 
       var done = false;
+
       function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
           done = true;
@@ -108,7 +104,6 @@ function selectedMovieTrailer(data) {
     });
 }
 
-
 // Selected/Focused Movie Primary Function
 function selectedMovieHTML(data) {
   let selMovie = document.querySelector(".selected-movie");
@@ -117,49 +112,55 @@ function selectedMovieHTML(data) {
   while (selMovie.firstChild != null) {
     selMovie.removeChild(selMovie.firstChild);
   }
+  try {
+    let card = document.createElement("div");
+    card.classList.add("card", "horizontal", "main-search-result-for-styling");
+    selMovie.append(card);
 
-  // Setup Card
-  let card = document.createElement("div");
-  card.classList.add("card", "horizontal", "main-search-result-for-styling");
-  selMovie.append(card);
+    // Add Card Image
+    let cardImageDiv = document.createElement("div");
+    cardImageDiv.classList.add("card-image");
+    card.appendChild(cardImageDiv);
+    let cardImage = document.createElement("img");
+    cardImage.setAttribute(
+      "src",
+      `https://image.tmdb.org/t/p/original${String(data.poster_path)}`
+    );
 
-  // Add Card Image
-  let cardImageDiv = document.createElement("div");
-  cardImageDiv.classList.add("card-image");
-  card.appendChild(cardImageDiv);
-  let cardImage = document.createElement("img");
-  cardImage.setAttribute(
-    "src",
-    `https://image.tmdb.org/t/p/original${String(data.poster_path)}`
-  );
+    cardImageDiv.classList.add("fixed-image");
+    cardImageDiv.appendChild(cardImage);
+    console.log(data);
 
-  cardImageDiv.classList.add("fixed-image");
-  cardImageDiv.appendChild(cardImage);
-  console.log(data);
+    // Add Card Info
+    let cardStacked = document.createElement("div");
+    cardStacked.classList.add("card-stacked");
+    card.appendChild(cardStacked);
+    let cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+    cardStacked.appendChild(cardContent);
 
-  // Add Card Info
-  let cardStacked = document.createElement("div");
-  cardStacked.classList.add("card-stacked");
-  card.appendChild(cardStacked);
-  let cardContent = document.createElement("div");
-  cardContent.classList.add("card-content");
-  cardStacked.appendChild(cardContent);
+    cardContent.innerHTML = `
+    <h4>${String(data.title)}</h4>
+    <p>${String(data.overview)}</p>
+    <br>
+    <p>User Rating: ${String(data.vote_average)}⭐</p>
+    <br>
+    <p>Release Date: ${String(data.release_date)}</p>
+    <br>
+    <div id="player"><div>  
+    
+    `;
 
-  cardContent.innerHTML = `
-  <h4>${String(data.title)}</h4>
-  <p>${String(data.overview)}</p>
-  <br>
-  <p>User Rating: ${String(data.vote_average)}⭐</p>
-  <br>
-  <p>Release Date: ${String(data.release_date)}</p>
-  <br>
-  <div id="player"><div>  
-  
-  `;
+    selectedMovieTrailer(String(data.id));
+  } catch (error) {
+    let errorP = document.createElement("p");
+    selMovie.appendChild(errorP);
+    errorP.innerText = "No movies were found for your search"
 
-  selectedMovieTrailer(String(data.id));
+
+  }
 }
-
+// Setup Card
 
 function secondaryMovies(data) {
   let dataCopy = data;
@@ -181,7 +182,6 @@ function secondaryMovies(data) {
   return chosenTitles;
 }
 
-
 // Secondary/Additional Movie Selection
 function secondaryMoviesHTML(selected) {
   let simmilarChoices = document.querySelector(".simmilar-choices");
@@ -190,8 +190,8 @@ function secondaryMoviesHTML(selected) {
     simmilarChoices.removeChild(simmilarChoices.firstChild);
   }
 
+ try{
   for (let i = 0; i < selected.length; i++) {
-
     // Card Setup
     let movieDiv = document.createElement("div");
     movieDiv.classList.add(
@@ -206,33 +206,26 @@ function secondaryMoviesHTML(selected) {
     movieDiv.setAttribute("data-selection", i);
     simmilarChoices.appendChild(movieDiv);
 
-    // // stacked card div
-    // let cardStacked = document.createElement("div");
-    // cardStacked.classList.add("card-stacked");
-    // movieDiv.appendChild(cardStacked);
-
-    // // card content
-    // let cardContent = document.createElement("div");
-    // cardContent.classList.add("card-content");
-    // cardStacked.appendChild(cardContent);
-    // let title = document.createElement("p");
-    // //title.setAttribute("class","card-title")
-    // title.innerText = selected[i].title;
-    // cardContent.appendChild(title);
-
     // Set Card Image
-    let cardImage = document.createElement("div");
-    cardImage.classList.add("card-image");
-    movieDiv.appendChild(cardImage);
-    let poster = document.createElement("img");
-    poster.setAttribute(
-      "src",
-      `https://image.tmdb.org/t/p/original${selected[i].poster_path}`
-    );
-    cardImage.appendChild(poster);
+    
+      let cardImage = document.createElement("div");
+      cardImage.classList.add("card-image");
+      movieDiv.appendChild(cardImage);
+      let poster = document.createElement("img");
+      poster.setAttribute(
+        "src",
+        `https://image.tmdb.org/t/p/original${selected[i].poster_path}`
+      );
+      cardImage.appendChild(poster);
+    }
+  }catch{
+    let error = document.createElement("p");
+    simmilarChoices.appendChild(error);
+    error.innerText = "No movies were found for your search. :("
+
   }
-  clickedActions(selected);
-}
+    clickedActions(selected);
+  }
 
 
 // Storage
@@ -252,7 +245,6 @@ function storedCheckedItems(checkboxItems) {
     }
   }
 }
-
 
 function getGenre(api_key) {
   return new Promise(function (resolve, reject) {
@@ -293,7 +285,6 @@ function getGenre(api_key) {
   });
 }
 
-
 function discoverCall(genreList) {
   return new Promise(function (resolve, reject) {
     // API does not accept form data so using URL manipulation.
@@ -309,7 +300,6 @@ function discoverCall(genreList) {
       });
   });
 }
-
 
 function checkboxGenre() {
   let array = [];
@@ -338,7 +328,6 @@ function checkboxGenre() {
 
   return stringQuery;
 }
-
 
 function clickedActions(items) {
   let selectedDiv = document.querySelector(".simmilar-choices");

@@ -60,10 +60,15 @@
   border-color: #f5ecec;
 }
 
+.simmilar-choices {
+  display: flex;
+}
+
 .footer {
   display: flex;
   justify-content: flex-end;
 }
+
 
 @media only screen and (max-width: 768px) {
   .main-search-result-for-styling {
